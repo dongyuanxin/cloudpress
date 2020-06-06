@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.2.1",
     "antd": "^4.3.1",
     "next": "9.4.4",
     "react": "16.13.1",
