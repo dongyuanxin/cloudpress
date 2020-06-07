@@ -2,6 +2,7 @@ import 'antd/dist/antd.css'
 import React, { useState } from 'react'
 import { Layout, Menu, Row, Col, Tooltip, Button, Input, Badge } from 'antd'
 import { CoffeeOutlined, AppstoreOutlined, CommentOutlined, FireOutlined, BellOutlined, GithubOutlined, SearchOutlined, ClockCircleOutlined } from '@ant-design/icons'
+import './archives/[page].scss'
 
 const { Header, Content, Footer } = Layout
 const { Search } = Input
