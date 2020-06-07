@@ -12,7 +12,7 @@ export default function MyApp({ Component, pageProps }) {
     
     return <Layout>
         <Header style={{background: 'white'}}>
-            <Row>
+            <Row style={{ width: '1040px', maxWidth: '95vw', margin: '0 auto'}}>
                 <Col span={12}>
                     <Menu mode='horizontal'>
                         <Menu.Item key="mail" icon={<CoffeeOutlined />}>
@@ -53,11 +53,11 @@ export default function MyApp({ Component, pageProps }) {
                 </Col>
             </Row>
         </Header>
-        <Content>
+        <Content style={{ width: '1040px', maxWidth: '95vw', margin: '0 auto'}}>
             <Component {...pageProps} />
         </Content>
         <Footer style={{ textAlign: 'center' }}>
-            Ant Design ©2018 Created by Ant UED
+            footer neirong
         </Footer>
     </Layout>
 }
