@@ -2,6 +2,7 @@ import 'antd/dist/antd.css'
 import React, { useState } from 'react'
 import { Layout, Menu, Row, Col, Tooltip, Button, Input, Badge } from 'antd'
 import { CoffeeOutlined, AppstoreOutlined, CommentOutlined, FireOutlined, BellOutlined, GithubOutlined, SearchOutlined, ClockCircleOutlined } from '@ant-design/icons'
+import CustomFooter from './../components/CustomFooter/'
 import './archives/[page].scss'
 
 const { Header, Content, Footer } = Layout
@@ -54,11 +55,9 @@ export default function MyApp({ Component, pageProps }) {
                 </Col>
             </Row>
         </Header>
-        <Content style={{ width: '1040px', maxWidth: '95vw', margin: '0 auto'}}>
+        <Content style={{ width: '1040px', maxWidth: '95vw', margin: '0 auto', minHeight: 'calc(100vh - 64px - 340px)'}}>
             <Component {...pageProps} />
         </Content>
-        <Footer style={{ textAlign: 'center' }}>
-            footer neirong
-        </Footer>
+        <CustomFooter style={{ width: '1040px', maxWidth: '95vw', margin: '0 auto'}}/>
     </Layout>
 }
