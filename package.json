@@ -1,0 +1,22 @@
+{
+  "name": "cloudpress",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dongyuanxin/cloudpress.git"
+  },
+  "author": "dongyuanxin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dongyuanxin/cloudpress/issues"
+  },
+  "homepage": "https://github.com/dongyuanxin/cloudpress#readme",
+  "devDependencies": {
+    "@nestjs/cli": "^7.2.0"
+  }
+}
