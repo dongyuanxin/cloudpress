@@ -4,6 +4,7 @@ import { Layout, Menu, Row, Col, Tooltip, Button, Input, Badge } from 'antd'
 import { CoffeeOutlined, AppstoreOutlined, CommentOutlined, FireOutlined, BellOutlined, GithubOutlined, SearchOutlined, ClockCircleOutlined } from '@ant-design/icons'
 import CustomFooter from './../components/CustomFooter/'
 import './archives/[page].scss'
+import 'highlight.js/styles/atom-one-light.css'
 
 const { Header, Content, Footer } = Layout
 const { Search } = Input
@@ -12,11 +13,11 @@ const { Search } = Input
 export default function MyApp({ Component, pageProps }) {
     const [searchColWidth, setSearchColWidth] = useState(8)
     
-    return <Layout>
+    return <Layout style={{background: '#f8fafc'}}>
         <Header style={{background: 'white'}}>
             <Row style={{ width: '1040px', maxWidth: '95vw', margin: '0 auto'}}>
                 <Col span={12}>
-                    <Menu mode='horizontal'>
+                    <Menu mode='horizontal' style={{borderColor: 'transparent'}}>
                         <Menu.Item key="mail" icon={<CoffeeOutlined />}>
                             简记
                         </Menu.Item>
