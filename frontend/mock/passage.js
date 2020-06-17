@@ -3,35 +3,44 @@ import axios from 'axios'
 export async function fetchPassage() {
     return {
         passage: `
-# 05/30 【Next.js】路由以及高级用法
+# CloudPress: 基于云开发的新一代内容建站工具
 
 <!-- 我是注释 -->
 
-Here is a footnote reference,[^1] and another.[^longnote]
+我是一个脚注[^1]， 这是另一个[^longnote]。
 
-[^1]: Here is the footnote.
+[^1]: 这是第一个脚注释
 
-[^longnote]: Here's one with multiple blocks.
+[^longnote]: 这是另一个脚注释
 
-### 路由
-- 支持动态路由
-- 提供了 \`next/link\` 库
-- 支持 Shallow routing
+> 我是一段引用
+>
+> Tencent CloudBase 在内容领域应用解决方案的最佳实践。
 
-::: warning 
+### 技术栈
 
-*here be dragons* 
+- **前端**：\`Next.js\` + \`Antd\`
+- **后端**：\`NestJS\` + 云容器
+- **数据库**：云数据库 + \`CMS\`
+- **存储**：云存储 + 静态网站托管
+
+::: warning 警告
+
+这是一条“告警”消息
 
 :::
 
-- [ ] hello
-- [x] 支持 Shallow routing
+::: error 错误
 
-\`\`\`html
-<script>
-  console.log("hello world!")
-</script>
-\`\`\`
+这是一条“错误”消息
+
+:::
+
+::: tip 提醒
+
+这是一条“提醒”消息
+
+:::
 
 \`\`\`javascript
 import React, { useState, useEffect } from "react";
@@ -71,6 +80,10 @@ const HomePage = () => {
 
 export default HomePage;
 \`\`\`
+
+- [ ] hello
+- [x] 支持 Shallow routing
+
 注意：
 
 - 对于 \`next/link\` 来说，既可以在page中使用useRouter返回obj，也可以直接使用Router。

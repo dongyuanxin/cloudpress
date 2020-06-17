@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Layout, Menu, Row, Col, Tooltip, Button, Input, Badge } from 'antd'
 import { CoffeeOutlined, AppstoreOutlined, CommentOutlined, FireOutlined, BellOutlined, GithubOutlined, SearchOutlined, ClockCircleOutlined } from '@ant-design/icons'
 import CustomFooter from './../components/CustomFooter/'
-import './archives/[page].scss'
+import "./../styles/index.scss";
 import 'highlight.js/styles/atom-one-light.css'
 
 const { Header, Content, Footer } = Layout

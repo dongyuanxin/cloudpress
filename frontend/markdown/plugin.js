@@ -24,7 +24,7 @@ const checkBoxPlugin = [checkbox]
 const footnotePlugin = [footnote]
 
 // :::容器
-const containerPlugins = ['warning', 'error', 'danger'].map(createContainer)
+const containerPlugins = ['warning', 'error', 'tip'].map(createContainer)
 
 export const plugins = [
     anchorPlugin, 
@@ -40,7 +40,10 @@ function createContainer(klass) {
             const token = tokens[idx]
             const info = token.info.trim().slice(klass.length).trim()
             if (token.nesting === 1) {
-                return `<div class="${klass} custom-block"><p class="custom-block-title">${info | info.toLocaleUpperCase()}</p>\n`
+                return `<div class="markdown-custom-block markdown-custom-block--${klass}">
+<p class="markdown-custom-block-title markdown-custom-block-title--${klass}">
+    ${info}
+</p>\n`
             } else {
                 return `</div>\n`
             }

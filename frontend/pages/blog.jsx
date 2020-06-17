@@ -5,10 +5,9 @@ import { fetchPassage } from './../mock/passage'
 const BlogPage = ({ html }) => {
     const a = 1
     return (
-        <div 
-            style={{lineHeight: '1.75', fontSize: '15px', background: 'white', padding: '50px 150px'}}
-            dangerouslySetInnerHTML={{__html: html}}
-        ></div>
+        <div className="page-article">
+            <div className="markdown" dangerouslySetInnerHTML={{__html: html}}></div>
+        </div>
     )
 }
 

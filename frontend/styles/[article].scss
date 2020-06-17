@@ -1,0 +1,144 @@
+.page-article {
+    .markdown {
+        line-height: 2;
+        font-size: 16px;
+        background: white;
+        padding: 50px 150px;
+        font-family: Source Sans Pro,Helvetica Neue,sans-serif;
+
+        &-custom-block {
+            padding: 16px 24px;
+            border-left-width: 6px;
+            border-left-style: solid;
+            margin: 16px 0;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+
+            &--tip {
+                background-color: #e6f7ff; // level-1
+                border-color: #69c0ff; // level-4
+                color: #40a9ff; // level-5
+            }
+
+            &--warning {
+                background-color: #fff7e6;
+                border-color: #ffc069;
+                color: #ffa940;
+            }
+
+            &--error {
+                background-color: #fff1f0;
+                border-color: #ff7875;
+                color: #ff4d4f;
+            }
+
+            p:last-child {
+                margin-bottom: 0;
+            }
+
+            &-title {
+                font-weight: bolder;
+                margin-bottom: 10px;
+
+                &--tip {
+                    color: #1890ff;
+                }
+
+                &--warning {
+                    color: #fa8c16;
+                }
+
+                &--error {
+                    color: #f5222d;
+                }
+            }
+        }
+
+        code {
+            padding: 2px 4px;
+            font-size: 0.9em;
+            color: #f5222d;
+            background-color: #f3f5f7;
+            border-radius: 4px;
+        }
+
+        pre.hljs {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 14px;
+            font-size: 14px;
+
+            code {
+                padding: 0;
+                font-size: 1em;
+                color: #595959;
+                background-color: transparent;
+                border-radius:0;
+            }
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            a {
+                color: rgba(0, 0, 0, 0.85);
+            }
+
+            &:hover {
+                a {
+                    color: #40a9ff;
+                }
+            }
+        }
+
+        sup {
+            padding: 0 3px;
+            a {
+                font-size: 12px;
+                font-weight: bold;
+                font-style: italic;
+            }
+        }
+
+        ul, ol {
+            padding-left: 30px;
+        }
+
+        // li {
+        //     display: flex;
+        //     align-items: center;
+        // }
+
+        input[type="checkbox"] {
+            margin-right: 8px;
+            height: 14px;
+            width: 14px;
+            cursor: pointer;
+        }
+
+        blockquote {
+            display: block;
+            position: relative;
+            border-radius: 2px;
+            margin: 24px 0;
+            padding: 12px 24px;
+            background-color: #f3f5f7;
+            color: #8c8c8c;
+            font-weight: 500;
+            font-style: italic;
+
+            p {
+                margin-bottom: 0;
+            }
+        }
+
+        hr.footnotes-sep {
+            margin: 24px 0;
+            border-color: #f0f0f0;
+        }
+
+        section.footnotes {
+            font-weight: 500;
+            color: #595959;
+            font-style: italic;
+        }
+    }
+}
