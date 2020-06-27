@@ -1,0 +1,45 @@
+.page-home {
+    height: calc(100vh - 64px);
+    position: relative;
+
+    &-inner {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -75%);
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 46px;
+        text-align: center;
+    }
+
+    p {
+        font-size: 18px;
+        text-align: center;
+        margin: 20px 0 15px;
+        color: rgba($color: #000000, $alpha: 0.85);
+        font-weight: 300;
+    }
+
+    .page-home-btns {
+        padding: 30px 0;
+        text-align: center;
+    }
+
+    .page-home-btn {
+        padding: 13px 23px;
+        font-size: 16px;
+        border-radius: 40px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid #1890ff;
+        margin: 10px 20px 0;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}

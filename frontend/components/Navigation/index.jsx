@@ -9,7 +9,8 @@ import {
     BellOutlined,
     GithubOutlined,
     SearchOutlined,
-    ClockCircleOutlined
+    ClockCircleOutlined,
+    HomeOutlined
 } from './../../components/Icon/'
 
 const { Header } = Layout
@@ -17,16 +18,23 @@ const { Header } = Layout
 const Navigation = ({
     style
 }) => {
-    const [searchColWidth, setSearchColWidth] = useState(8)
-    const [selectedKeys, setSelectedKeys] = useState(['jianji'])
     const router = useRouter()
+    const [searchColWidth, setSearchColWidth] = useState(8)
+    const [selectedKeys, setSelectedKeys] = useState([router.route])
     const nav = [
         {
-            title: '简记',
-            key: 'jianji',
-            icon: <CoffeeOutlined />,
+            title: '首页',
+            key: '/',
+            icon: <HomeOutlined />,
             disabled: false,
             link: '/'
+        },
+        {
+            title: '简记',
+            key: '/archives/[page]',
+            icon: <CoffeeOutlined />,
+            disabled: false,
+            link: '/archives/1'
         },
         {
             title: '小册',
@@ -39,12 +47,6 @@ const Navigation = ({
             key: 'liuyan',
             icon: <CommentOutlined />,
             disabled: true,
-        },
-        {
-            title: '收藏',
-            key: 'shoucang',
-            icon: <FireOutlined />,
-            disabled: true
         },
         {
             title: '更新',
