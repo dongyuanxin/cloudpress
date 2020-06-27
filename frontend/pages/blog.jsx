@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { md } from './../markdown/'
+import { md } from '../helpers/markdown'
 import { fetchPassage } from './../mock/passage' 
 
 const BlogPage = ({ html }) => {

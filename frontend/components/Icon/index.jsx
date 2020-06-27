@@ -1,5 +1,10 @@
 import dynamic from 'next/dynamic'
 
+export const HomeOutlined = dynamic(
+    () => import('@ant-design/icons/HomeOutlined'),
+    { ssr: false }
+)
+
 export const CoffeeOutlined = dynamic(
     () => import('@ant-design/icons/CoffeeOutlined'),
     { ssr: false }
