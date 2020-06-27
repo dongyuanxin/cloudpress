@@ -104,7 +104,7 @@ const CustomFooter = ({ style }) => {
                 <Divider style={{borderTopColor: 'rgba(255,255,255,.4)'}}/>
                 <div style={{color: 'rgba(255,255,255,.4)', textAlign: "center", fontSize: '16px'}}>
                     Made with 
-                    <span style={{color: 'rgb(255, 255, 255)'}}>&nbsp;❤</span>
+                    <span style={{color: 'rgb(255, 255, 255)'}}>&nbsp;❤&nbsp;</span>
                     by
                     <span style={{color: 'rgba(255,255,255,.9)'}}>&nbsp;CloudPress</span>
                 </div>
