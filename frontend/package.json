@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.2.1",
+    "@cloudbase/node-sdk": "^2.1.1",
     "antd": "^4.3.1",
     "axios": "^0.19.2",
     "highlight.js": "^10.0.3",
@@ -19,6 +20,7 @@
     "markdown-it-footnote": "^3.0.2",
     "markdown-it-inline-comments": "^1.0.1",
     "next": "9.4.4",
+    "nextjs-sitemap-generator": "^1.0.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "sass": "^1.26.8"
