@@ -1,23 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
-import Head from 'next/head'
+import { EyeOutlined, MessageOutlined } from './../../components/Icon'
 import { message, Row, Col, Switch, Pagination } from 'antd';
+import { countPassages, describePassages } from './../../providers/passage'
 
-const EyeOutlined = dynamic(
-    () => import('@ant-design/icons/EyeOutlined'),
-    { ssr: false }
-)
+const PAGE_SIZE = 10 // 每页大小
 
-const MessageOutlined = dynamic(
-    () => import('@ant-design/icons/MessageOutlined'),
-    { ssr: false }
-)
-
-const ArchievePage = ({ passages }) => {
+const ArchievePage = ({ passages, total }) => {
     const [easyMode, setEasyMode] = useState(true)
 
     const renderPassage = (passage) => {
-        const { title, date, description, tags, index} = passage
+        const { title, description, index} = passage
 
         return <Row justify="space-between" gutter={24} className="page-archive-psg">
             <Col span={16} style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
@@ -51,7 +44,7 @@ const ArchievePage = ({ passages }) => {
             return originalElement;
         }
 
-        return <Pagination showSizeChanger={false} total={500} itemRender={itemRender} />
+        return <Pagination showSizeChanger={false} total={total} itemRender={itemRender} />
     }
 
     const toogleMode = (checked) => {
@@ -94,19 +87,29 @@ const ArchievePage = ({ passages }) => {
 export default ArchievePage
 
 export async function getStaticPaths() {
+    const total = await countPassages()
+    const pageNum = Math.ceil(total / PAGE_SIZE)
+    const paths = []
+    for (let i = 0; i < pageNum; ++i) {
+        paths.push({
+            params: {
+                page: (i + 1).toString()
+            }
+        })
+    }
     return {
-        paths: [
-            { params: { page: '1' } },
-            { params: { page: '2' } },
-        ],
+        paths,
         fallback: false
     }
 }
 
 export async function getStaticProps({ params }) {
+    const total = await countPassages()
+    const passages = await describePassages(PAGE_SIZE, parseInt(params.page))
     return {
         props: {
             params,
+            total,
             passages: [
                 {
                     title: 'JetBrains全系列软件激活教程激活码以及JetBrains系列软件汉化包',
