@@ -59,7 +59,14 @@ const Navigation = ({
     return <Header style={style}>
         <Row style={{ width: '1040px', maxWidth: '95vw', margin: '0 auto'}}>
             <Col span={12}>
-                <Menu mode='horizontal' selectedKeys={selectedKeys} style={{borderColor: 'transparent'}}>
+                <Menu 
+                    mode='horizontal' 
+                    selectedKeys={selectedKeys} 
+                    style={{
+                        borderColor: 'transparent',
+                        fontWeight: 'bold'
+                    }}
+                >
                     {
                         nav.map((item) => (
                             <Menu.Item key={item.key} icon={item.icon} 
