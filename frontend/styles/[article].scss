@@ -64,13 +64,13 @@
         pre.hljs {
             background: #f8fafc;
             border-radius: 10px;
-            padding: 14px;
+            padding: 12px 24px;
             font-size: 14px;
 
             code {
                 padding: 0;
                 font-size: 1em;
-                color: #595959;
+                color: rgba(0, 0, 0, 0.6);
                 background-color: transparent;
                 border-radius:0;
             }
@@ -123,6 +123,12 @@
 
         ul, ol {
             padding-left: 30px;
+
+            li {
+                p {
+                    margin-bottom: 0;
+                }
+            }
         }
 
         // li {
