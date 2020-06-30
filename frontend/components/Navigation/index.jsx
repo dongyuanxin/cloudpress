@@ -34,7 +34,7 @@ const Navigation = ({
             key: '/archives/[page]',
             icon: <CoffeeOutlined />,
             disabled: false,
-            link: '/archives/1'
+            link: '/archives/1/'
         },
         {
             title: '小册',
@@ -70,7 +70,7 @@ const Navigation = ({
                     {
                         nav.map((item) => (
                             <Menu.Item key={item.key} icon={item.icon} 
-                                onClick={() => item.disabled && message.warning('功能未开放')}
+                                onClick={() => item.disabled && message.warning('业务需求多，下班熬夜肝')}
                             >
                                 {
                                     item.link 
@@ -94,7 +94,11 @@ const Navigation = ({
                             </Badge>
                         </Button>
                         <Tooltip placement="top" title="客官，给个Star呗(ง •̀灬•́)ง">
-                            <Button type="text" style={{fontSize: '1.4em', fontWeight: 'bold'}}>
+                            <Button 
+                                type="text" 
+                                style={{fontSize: '1.4em', fontWeight: 'bold'}} 
+                                onClick={() => window.open('https://github.com/dongyuanxin/cloudpress', '_blank')}
+                            >
                                 <GithubOutlined />
                             </Button>
                         </Tooltip>
