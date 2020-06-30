@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import dynamic from 'next/dynamic'
-import { EyeOutlined, MessageOutlined } from './../../components/Icon'
-import { message, Row, Col, Switch, Pagination } from 'antd';
+import { message, Row, Col, Switch, Pagination } from 'antd'
+import _ from 'lodash'
+import removeMd from "remove-markdown"
 import { countPassages, describePassages } from './../../providers/passage'
 
 const PAGE_SIZE = 10 // 每页大小
@@ -10,36 +10,38 @@ const ArchievePage = ({ passages, total }) => {
     const [easyMode, setEasyMode] = useState(true)
 
     const renderPassage = (passage) => {
-        const { title, description, index} = passage
+        const { title, description, index, publishTime, psgID } = passage
 
-        return <Row justify="space-between" gutter={24} className="page-archive-psg">
-            <Col span={16} style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
-                <div className="page-archive-psg-icon">{index}</div>
-                <div className="page-archive-psg-title">
-                    <h2>{title}</h2>
-                    <p>{description}</p>
-                </div>
-            </Col>
+        return <a target="_self" href={`/${psgID}/`} style={{display: 'block'}}>
+            <Row justify="space-between" gutter={24} className="page-archive-psg" key={index}>
+                <Col span={16} style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+                    <div className="page-archive-psg-icon">{index}</div>
+                    <div className="page-archive-psg-title">
+                        <h2>{title}</h2>
+                        <p>{description}</p>
+                    </div>
+                </Col>
 
-            <Col span={8} style={{display: 'flex', alignItems: 'center', justifyContent: 'flex-end'}}>
-                <span className="page-archive-psg-info">
-                    <EyeOutlined style={{marginRight: '5px'}}/>100
-                </span>
-                <span className="page-archive-psg-info">
-                    <MessageOutlined style={{marginRight: '5px'}}/>123
-                </span>
-                <span className="page-archive-psg-info">
-                    2020.02.02
-                </span>
-            </Col>
-        </Row>
+                <Col span={8} style={{display: 'flex', alignItems: 'center', justifyContent: 'flex-end'}}>
+                    {/* <span className="page-archive-psg-info">
+                        <EyeOutlined style={{marginRight: '5px'}}/>1000+
+                    </span>
+                    <span className="page-archive-psg-info">
+                        <MessageOutlined style={{marginRight: '5px'}}/>0
+                    </span> */}
+                    <span className="page-archive-psg-info">
+                        {publishTime}
+                    </span>
+                </Col>
+            </Row>
+        </a>
     }
 
     const renderPagination = () => {
         function itemRender(current, type, originalElement) {
-            // if (type === 'page') {
-            //     return <a href={'https://xxoo521.com/' + current}>{current}</a>
-            // }
+            if (type === 'page') {
+                return <a target="_self" href={`/archives/${current}/`}>{current}</a>
+            }
 
             return originalElement;
         }
@@ -73,8 +75,9 @@ const ArchievePage = ({ passages, total }) => {
             </div>
 
             <div>
-                {renderPassage(passages[0], 0)}
-                {renderPassage(passages[1], 1)}
+                {
+                    passages.map(passage => renderPassage(passage))
+                }
             </div>
 
             <div className="page-archive-pagination">
@@ -105,35 +108,21 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
     const total = await countPassages()
-    const passages = await describePassages(PAGE_SIZE, parseInt(params.page))
+    const page = parseInt(params.page)
+    const passages = await describePassages(PAGE_SIZE, page)
+
     return {
         props: {
             params,
             total,
-            passages: [
-                {
-                    title: 'JetBrains全系列软件激活教程激活码以及JetBrains系列软件汉化包',
-                    date: '2020-06-04',
-                    description: 'JetBrains全系列软件激活教程，共有两种方法，喜欢哪种用哪种。另外附上JetBrains系列软件的汉化包以及中文设置教程，希望大家喜欢。',
-                    tags: [
-                        'a',
-                        'b',
-                        'c'
-                    ],
-                    index: 0
-                },
-                {
-                    title: 'Autodesk Maya 2020 Mac安装激活教程，包教包会！',
-                    date: '2020-05-27',
-                    description: 'AutoDesk 系列软件破解激活非常麻烦，很多小伙伴下载完一脸懵逼，不知道如何能可以激活，今天MacWk为大家奉上一篇 Autodesk Maya 2020 for Mac 详细的激活教程，小伙伴们以后自己就可以愉快的激活啦！',
-                    tags: [
-                        'a',
-                        'b',
-                        'c'
-                    ],
-                    index: 10
-                }
-            ]
+            passages: passages.map((passage, index) => {
+                passage.index = (page - 1) * PAGE_SIZE + index + 1
+                passage.description = removeMd(passage.content || '')
+                    .replace(/\n/g, "")
+                    .trim()
+                    .slice(0, 100) + "....."
+                return _.omit(passage, ['updateTime', 'createTime'])
+            })
         }
     }
 }

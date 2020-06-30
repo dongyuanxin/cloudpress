@@ -39,7 +39,7 @@ export async function describePassages(
 
     return data.map((item) => ({
         ...item,
-        cover: getBucketUrl(item.cover),
-        publishTime: moment(item.publishTime).format('YYYY/MM/DD')
+        cover: getBucketUrl(item.cover) || '',
+        publishTime: moment(item.publishTime).format('YYYY.MM.DD')
     }))
 }
