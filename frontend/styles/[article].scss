@@ -1,9 +1,14 @@
 .page-article {
+    padding: 50px 150px;
+    
+    h1 {
+        font-size: 32px;
+    }
+
     .markdown {
         line-height: 2;
         font-size: 16px;
         background: white;
-        padding: 50px 150px;
         font-family: Source Sans Pro,Helvetica Neue,sans-serif;
 
         &-custom-block {
