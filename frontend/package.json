@@ -23,6 +23,7 @@
     "moment": "^2.27.0",
     "next": "9.4.4",
     "nextjs-sitemap-generator": "^1.0.0",
+    "prettier": "^2.0.5",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "remove-markdown": "^0.3.0",

@@ -10,19 +10,19 @@ const CustomFooter = ({ style }) => {
             items: [
                 {
                     name: '源码地址',
-                    url: 'https://xxoo521.com/'
+                    url: 'https://github.com/dongyuanxin/cloudpress'
                 },
                 {
                     name: '意见反馈',
-                    url: 'https://xxoo521.com/'
+                    url: 'https://github.com/dongyuanxin/cloudpress/issues'
                 },
                 {
                     name: '常见问题',
-                    url: 'https://xxoo521.com/'
+                    url: 'https://github.com/dongyuanxin/cloudpress/issues'
                 },
                 {
                     name: '更新日志',
-                    url: 'https://xxoo521.com/'
+                    url: 'https://github.com/dongyuanxin/cloudpress/commits/master'
                 }
             ]
         },
@@ -30,24 +30,20 @@ const CustomFooter = ({ style }) => {
             name: '技术栈',
             items: [
                 {
-                    name: 'Ant Design',
-                    url: 'https://xxoo521.com/'
+                    name: 'CloudBase',
+                    url: 'https://www.cloudbase.net/'
                 },
                 {
                     name: 'Next.js',
-                    url: 'https://xxoo521.com/'
+                    url: 'https://nextjs.org/'
                 },
                 {
                     name: 'NestJS',
-                    url: 'https://xxoo521.com/'
+                    url: 'https://nestjs.com/'
                 },
                 {
-                    name: '云开发',
-                    url: 'https://xxoo521.com/'
-                },
-                {
-                    name: 'Travis',
-                    url: 'https://xxoo521.com/'
+                    name: 'Ant Design',
+                    url: 'https://ant.design/'
                 }
             ]
         },
@@ -56,19 +52,19 @@ const CustomFooter = ({ style }) => {
             items: [
                 {
                     name: 'Github',
-                    url: 'https://xxoo521.com/'
+                    url: 'https://github.com/dongyuanxin'
                 },
                 {
                     name: 'junjin.im',
-                    url: 'https://xxoo521.com/'
+                    url: 'https://juejin.im/user/5b91fcf06fb9a05d3c7fd4a5'
                 },
                 {
                     name: 'SegmentFault',
-                    url: 'https://xxoo521.com/'
+                    url: 'https://segmentfault.com/u/godbmw'
                 },
                 {
                     name: 'xin-tan.com',
-                    url: 'https://xxoo521.com/'
+                    url: 'https://xin-tan.com/'
                 }
             ]
         }
@@ -80,7 +76,7 @@ const CustomFooter = ({ style }) => {
         const renderItems = (items = []) => {
             return items.map((item, index) => (
                 <Row key={index} style={{margin: '12px 0'}}>
-                    <a style={{color: 'rgba(255,255,255,.9)'}} href={item.url}>{item.name}</a>
+                    <a style={{color: 'rgba(255,255,255,.9)'}} href={item.url} target="_blank">{item.name}</a>
                 </Row>
             ))
         }

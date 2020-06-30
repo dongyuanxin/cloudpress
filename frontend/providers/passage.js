@@ -43,3 +43,59 @@ export async function describePassages(
         publishTime: moment(item.publishTime).format('YYYY.MM.DD')
     }))
 }
+
+/**
+ * 获取对应的文章
+ * @param {string} psgID 
+ * @return {Promise<object>}
+ */
+export async function describePassage(psgID) {
+    const app = await getApp();
+    const collection = app.database().collection("v1-passages");
+
+    const { data } = await collection
+        .where({
+            psgID
+        })
+        .get()
+
+    return {
+        ...data[0],
+        cover: getBucketUrl(data[0].cover) || '',
+        publishTime: moment(data[0].publishTime).format('YYYY.MM.DD')
+    }
+}
+
+/**
+ * 获取文章的全部id
+ * @return {Promise<string>}
+ */
+export async function describePsgIDs() {
+    const app = await getApp();
+    const collection = app.database().collection("v1-passages");
+
+    const total = await countPassages()
+    const step = 100 
+    // 查询数量上限为100，要分批查询
+    const promises = []
+    for (let i = 0; i <= Math.floor(total / step); ++i) {
+        promises.push(
+            collection.where({})
+                .field({ psgID: true })
+                .orderBy('publishTime', 'desc')
+                .skip(i * step)
+                .limit(step)
+                .get()
+        )
+    }
+
+    const results = await Promise.all(promises)
+    const psgIDs = []
+    for (const { data } of results) {
+        for (const { psgID } of data) {
+            psgIDs.push(psgID)
+        }
+    }
+    
+    return psgIDs
+}
