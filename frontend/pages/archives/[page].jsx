@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { message, Row, Col, Switch, Pagination } from 'antd'
 import _ from 'lodash'
 import removeMd from "remove-markdown"
+import SeoHead from './../../components/SeoHead/'
 import { countPassages, describePassages } from './../../providers/passage'
 
 const PAGE_SIZE = 10 // 每页大小
@@ -59,6 +60,10 @@ const ArchievePage = ({ passages, total, page }) => {
 
     return (
         <>
+            <SeoHead 
+                title={`归档-第${page}页 | 心谭博客`}
+                description={passages.map(passage => passage.title).join('，')}
+            />
             <div className="page-archive-head">
                 <div className="page-archive-head-left">
                     <span>

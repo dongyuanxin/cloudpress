@@ -2,21 +2,22 @@ import React, { useEffect } from 'react'
 import { md } from '../helpers/markdown' 
 import _ from 'lodash'
 import * as prettier from 'prettier'
-import { Row, Col } from 'antd' 
-import { EyeOutlined, MessageOutlined } from './../components/Icon'
+import removeMd from 'remove-markdown'
+import SeoHead from './../components/SeoHead/'
 import { describePsgIDs, describePassage } from './../providers/passage'
 
-const BlogPage = ({ contentHtml, passage }) => {
+const BlogPage = ({ contentHtml, passage, description }) => {
     return (
-        <div className="page-article">
-            <h1>{passage.title}</h1>
-            {/* <Row gutter={8}>
-                <Col span={8}>
-                    发布于 { passage.publishTime }
-                </Col>
-            </Row> */}
-            <div className="markdown" dangerouslySetInnerHTML={{__html: contentHtml}}></div>
-        </div>
+        <> 
+            <SeoHead
+                title={`${passage.title} | 心谭博客`}
+                description={description}
+            />
+            <div className="page-article">
+                <h1>{passage.title}</h1>
+                <div className="markdown" dangerouslySetInnerHTML={{__html: contentHtml}}></div>
+            </div>
+        </>
     )
 }
 
@@ -43,6 +44,11 @@ export async function getStaticProps({ params }) {
     return {
         props: {
             contentHtml: md.render(content),
+            description: 
+                removeMd(content)
+                    .replace(/\n/g, "")
+                    .trim()
+                    .slice(0, 155) + "...",
             passage: _.omit(passage, ['updateTime', 'createTime', 'content', 'id', '_id'])
         }
     }
