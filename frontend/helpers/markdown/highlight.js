@@ -1,4 +1,5 @@
 import hljs from 'highlight.js'
+import { md } from './index'
 
 export const highlight = (str, lang) => {
     if (lang && hljs.getLanguage(lang)) {
