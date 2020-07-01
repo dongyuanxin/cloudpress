@@ -1,6 +1,6 @@
 .page-article {
     padding: 50px 150px;
-    
+
     h1 {
         font-size: 32px;
     }
@@ -9,7 +9,7 @@
         line-height: 2;
         font-size: 16px;
         background: white;
-        font-family: Source Sans Pro,Helvetica Neue,sans-serif;
+        font-family: Source Sans Pro, Helvetica Neue, sans-serif;
 
         &-custom-block {
             padding: 16px 24px;
@@ -77,11 +77,16 @@
                 font-size: 1em;
                 color: rgba(0, 0, 0, 0.6);
                 background-color: transparent;
-                border-radius:0;
+                border-radius: 0;
             }
         }
 
-        h1, h2, h3, h4, h5, h6 {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
             a {
                 color: rgba(0, 0, 0, 0.85);
             }
@@ -126,7 +131,8 @@
             }
         }
 
-        ul, ol {
+        ul,
+        ol {
             padding-left: 30px;
 
             li {
@@ -200,9 +206,10 @@
                 border-top: 1px solid #dfe2e5;
             }
 
-            td, th {
+            td,
+            th {
                 border: 1px solid #dfe2e5;
-                padding: .6em 1em;
+                padding: 0.6em 1em;
             }
         }
 
@@ -213,7 +220,7 @@
             z-index: 0;
 
             &::before {
-                content: '本文脚注';
+                content: "本文脚注";
                 position: absolute;
                 top: 0;
                 left: 16px;
@@ -222,7 +229,7 @@
                 z-index: 1;
                 padding: 0 16px;
                 background: white;
-                color: rgba(0,0,0,.85);
+                color: rgba(0, 0, 0, 0.85);
                 font-weight: 500;
                 font-size: 1.1em;
                 font-style: italic;

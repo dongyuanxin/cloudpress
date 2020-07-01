@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from "axios";
 
 export async function fetchPassage() {
     return {
@@ -124,6 +124,6 @@ export default HomePage;
 
 ![](https://6f66-offcial-site-cms-15fc4b-1258016615.tcb.qcloud.la/hotfix/008.jpg)
 
-`
-    }
+`,
+    };
 }

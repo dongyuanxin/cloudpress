@@ -49,15 +49,15 @@
 
             h2 {
                 font-size: 18px;
-                overflow:hidden; 
-                text-overflow:ellipsis; 
-                white-space:nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
             }
 
             p {
-                overflow:hidden; 
-                text-overflow:ellipsis; 
-                white-space:nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
                 margin-bottom: 0;
                 color: #8c8c8c;
             }
@@ -75,7 +75,8 @@
         text-align: center;
         margin: 30px 0;
 
-        .ant-pagination-prev, .ant-pagination-next {
+        .ant-pagination-prev,
+        .ant-pagination-next {
             display: none;
         }
 

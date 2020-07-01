@@ -1,23 +1,23 @@
 {
-  "name": "cloudpress",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "login": "./bin/login.sh",
-    "deploy:frontend": "./bin/deploy-frontend.sh"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dongyuanxin/cloudpress.git"
-  },
-  "author": "dongyuanxin",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/dongyuanxin/cloudpress/issues"
-  },
-  "homepage": "https://github.com/dongyuanxin/cloudpress#readme",
-  "devDependencies": {
-    "@nestjs/cli": "^7.2.0"
-  }
+    "name": "cloudpress",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "login": "./bin/login.sh",
+        "deploy:frontend": "./bin/deploy-frontend.sh"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/dongyuanxin/cloudpress.git"
+    },
+    "author": "dongyuanxin",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/dongyuanxin/cloudpress/issues"
+    },
+    "homepage": "https://github.com/dongyuanxin/cloudpress#readme",
+    "devDependencies": {
+        "prettier": "^2.0.5"
+    }
 }

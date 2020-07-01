@@ -3,7 +3,7 @@
  * @param {String} url 云存储的特定url
  */
 export function getBucketUrl(url) {
-    if (typeof url !== 'string' || !url.startsWith("cloud://")) {
+    if (typeof url !== "string" || !url.startsWith("cloud://")) {
         return url;
     }
 

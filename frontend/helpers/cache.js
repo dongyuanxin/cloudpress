@@ -1,4 +1,4 @@
-import * as crypto from 'crypto';
+import * as crypto from "crypto";
 
 const cache = new Map();
 const cacheWrapper = (func) => {
