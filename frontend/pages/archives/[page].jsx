@@ -127,7 +127,7 @@ export async function getStaticProps({ params }) {
                     .replace(/\n/g, "")
                     .trim()
                     .slice(0, 100) + "....."
-                return _.omit(passage, ['updateTime', 'createTime'])
+                return _.omit(passage, ['updateTime', 'createTime', 'content'])
             })
         }
     }
