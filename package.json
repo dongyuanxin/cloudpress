@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "login": "./bin/login.sh",
+    "deploy:frontend": "./bin/deploy-frontend.sh"
   },
   "repository": {
     "type": "git",
