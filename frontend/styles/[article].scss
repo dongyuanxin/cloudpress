@@ -1,8 +1,29 @@
 .page-article {
-    padding: 50px 150px;
+    padding: 50px 0;
 
     h1 {
         font-size: 32px;
+    }
+
+    .ant-anchor-link-title {
+        white-space: normal;
+    }
+
+    // 不支持 h1 和 h6 锚点
+    .anchor-h2 {
+        padding-left: 16px;
+    }
+
+    .anchor-h3 {
+        padding-left: 26px;
+    }
+
+    .anchor-h4 {
+        padding-left: 36px;
+    }
+
+    .anchor-h5 {
+        padding-left: 46px;
     }
 
     .markdown {
