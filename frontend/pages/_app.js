@@ -1,6 +1,6 @@
 import "antd/dist/antd.css";
 import React, { useState } from "react";
-import { Layout } from "antd";
+import { Layout, BackTop } from "antd";
 import CustomFooter from "./../components/CustomFooter/";
 import Navigation from "./../components/Navigation/";
 import "./../styles/index.scss";
@@ -26,6 +26,7 @@ export default function MyApp({ Component, pageProps }) {
             <CustomFooter
                 style={{ width: "1040px", maxWidth: "95vw", margin: "0 auto" }}
             />
+            <BackTop style={{ right: "50px" }}></BackTop>
         </Layout>
     );
 }
