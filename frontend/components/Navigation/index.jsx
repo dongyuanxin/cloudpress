@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
     Layout,
     Menu,
@@ -9,6 +9,7 @@ import {
     Input,
     Badge,
     message,
+    Switch,
 } from "antd";
 import { useRouter } from "next/router";
 import {
@@ -22,13 +23,22 @@ import {
     ClockCircleOutlined,
     HomeOutlined,
 } from "./../../components/Icon/";
+import Darkmode from "darkmode-js";
 
 const { Header } = Layout;
+
+const darkmodeOptions = {
+    time: "0.5s", // default: '0.3s'
+    saveInCookies: true, // default: true,
+    label: "🌓", // default: ''
+    autoMatchOsTheme: false, // default: true
+};
 
 const Navigation = ({ style }) => {
     const router = useRouter();
     const [searchColWidth, setSearchColWidth] = useState(8);
     const [selectedKeys, setSelectedKeys] = useState([router.route]);
+    const [isLightMode, setIsLightMode] = useState(true);
     const nav = [
         {
             title: "首页",
@@ -63,6 +73,12 @@ const Navigation = ({ style }) => {
             disabled: true,
         },
     ];
+    const refDarkmode = useRef(null);
+
+    useEffect(() => {
+        refDarkmode.current = new Darkmode(darkmodeOptions);
+        setIsLightMode(localStorage.getItem("darkmode") === "false");
+    }, []);
 
     return (
         <Header style={style}>
@@ -111,7 +127,22 @@ const Navigation = ({ style }) => {
                                 }
                             />
                         </Col>
-                        <Col span={8}>
+                        <Col
+                            span={8}
+                            style={{ display: "flex", alignItems: "center" }}
+                        >
+                            <Switch
+                                style={{
+                                    margin: "0 12px",
+                                }}
+                                checkedChildren="🌝"
+                                unCheckedChildren="🌚"
+                                checked={isLightMode}
+                                onChange={(checked) => {
+                                    setIsLightMode(checked);
+                                    refDarkmode.current.toggle();
+                                }}
+                            />
                             <Button type="text">
                                 <Badge dot={true}>
                                     <BellOutlined
@@ -129,6 +160,7 @@ const Navigation = ({ style }) => {
                                 <Button
                                     type="text"
                                     style={{
+                                        display: "inline-flex",
                                         fontSize: "1.4em",
                                         fontWeight: "bold",
                                     }}
