@@ -1,0 +1,17 @@
+// darkmode.js
+
+.darkmode-layer,
+.darkmode-toggle {
+    z-index: 500;
+}
+
+.darkmode-layer--button,
+.darkmode-toggle {
+    width: 40px !important;
+    height: 40px !important;
+}
+
+.darkmode-layer--simple {
+    height: 100% !important;
+    width: 100% !important;
+}
