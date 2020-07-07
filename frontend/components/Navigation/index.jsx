@@ -77,7 +77,7 @@ const Navigation = ({ style }) => {
 
     useEffect(() => {
         refDarkmode.current = new Darkmode(darkmodeOptions);
-        setIsLightMode(localStorage.getItem("darkmode") === "false");
+        setIsLightMode(localStorage.getItem("darkmode") !== "true");
     }, []);
 
     return (
