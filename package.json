@@ -5,6 +5,7 @@
     "main": "index.js",
     "scripts": {
         "commit": "git-cz",
+        "init:db": "./bin/init-db",
         "login": "./bin/login.sh",
         "deploy:frontend": "./bin/deploy-frontend.sh"
     },
@@ -35,5 +36,9 @@
         "cz-conventional-changelog": "^3.2.0",
         "husky": "^4.2.5",
         "prettier": "^2.0.5"
+    },
+    "dependencies": {
+        "@cloudbase/node-sdk": "^2.2.1",
+        "dotenv": "^8.2.0"
     }
 }
