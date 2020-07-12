@@ -8,7 +8,7 @@ import moment from "moment";
  */
 export async function countPassages() {
     const app = await getApp();
-    const collection = app.database().collection("v1-passages");
+    const collection = app.database().collection("cloudpress-v1-passages");
 
     const { total } = await collection.where({}).count();
 
@@ -23,7 +23,7 @@ export async function countPassages() {
  */
 export async function describePassages(limit = 10, page = 1) {
     const app = await getApp();
-    const collection = app.database().collection("v1-passages");
+    const collection = app.database().collection("cloudpress-v1-passages");
 
     const { data } = await collection
         .where({})
@@ -46,7 +46,7 @@ export async function describePassages(limit = 10, page = 1) {
  */
 export async function describePassage(psgID) {
     const app = await getApp();
-    const collection = app.database().collection("v1-passages");
+    const collection = app.database().collection("cloudpress-v1-passages");
 
     const { data } = await collection
         .where({
@@ -67,7 +67,7 @@ export async function describePassage(psgID) {
  */
 export async function describePsgIDs() {
     const app = await getApp();
-    const collection = app.database().collection("v1-passages");
+    const collection = app.database().collection("cloudpress-v1-passages");
 
     const total = await countPassages();
     const step = 100;
