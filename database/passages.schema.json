@@ -1,0 +1,67 @@
+{
+    "collectionName": "cloudpress-v1-passages",
+    "label": "[v1]文章",
+    "fields": [
+        {
+            "fieldName": "title",
+            "fieldType": "String",
+            "hidden": false,
+            "isRequired": true,
+            "fieldLabel": "标题"
+        },
+        {
+            "fieldType": "String",
+            "helpText": "文章唯一标识，用于拼接路由",
+            "hidden": false,
+            "isRequired": true,
+            "fieldLabel": "标识",
+            "fieldName": "psgID"
+        },
+        {
+            "isRequired": true,
+            "fieldLabel": "内容",
+            "fieldName": "content",
+            "fieldType": "Markdown",
+            "helpText": "会选取前150个字符作为简介",
+            "hidden": false
+        },
+        {
+            "isRequired": true,
+            "fieldLabel": "标签",
+            "fieldName": "tags",
+            "fieldType": "Array",
+            "helpText": "标签数组",
+            "hidden": false
+        },
+        {
+            "fieldLabel": "封面",
+            "fieldName": "cover",
+            "fieldType": "Image",
+            "helpText": "简洁模式下不会展示",
+            "hidden": false,
+            "isRequired": false
+        },
+        {
+            "fieldName": "publishTime",
+            "fieldType": "DateTime",
+            "helpText": "文章发布时间",
+            "hidden": false,
+            "isRequired": true,
+            "fieldLabel": "发布日期"
+        },
+        {
+            "isRequired": true,
+            "fieldLabel": "点赞数",
+            "fieldName": "goodTimes",
+            "fieldType": "Number",
+            "helpText": "点赞次数",
+            "hidden": false
+        },
+        {
+            "fieldType": "Boolean",
+            "hidden": false,
+            "fieldLabel": "是否上锁",
+            "fieldName": "isLocked"
+        }
+    ]
+}

@@ -1,0 +1,28 @@
+{
+    "collectionName": "cloudpress-v1-site-infos",
+    "description": "网站用到的全局信息",
+    "fields": [
+        {
+            "fieldType": "String",
+            "hidden": false,
+            "isRequired": true,
+            "fieldLabel": "信息标识",
+            "fieldName": "infoID"
+        },
+        {
+            "fieldLabel": "信息值",
+            "fieldName": "infoVal",
+            "fieldType": "String",
+            "hidden": false
+        },
+        {
+            "helpText": "排序展示",
+            "hidden": false,
+            "isRequired": true,
+            "fieldLabel": "排序",
+            "fieldName": "order",
+            "fieldType": "Number"
+        }
+    ],
+    "label": "[v1]网站信息"
+}
