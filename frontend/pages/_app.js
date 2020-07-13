@@ -30,6 +30,12 @@ export default function MyApp({ Component, pageProps }) {
                     name="viewport"
                     content="width=1024, user-scalable=yes, initial-scale=1"
                 />
+                <link
+                    rel="sitemap"
+                    type="application/xml"
+                    title="Sitemap"
+                    href="/sitemap.xml"
+                />
             </Head>
             <Navigation style={{ background: "white" }} />
             <Content

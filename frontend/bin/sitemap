@@ -4,7 +4,7 @@ const path = require("path");
 const sitemap = require("nextjs-sitemap-generator");
 
 sitemap({
-    baseUrl: "https://www.cloudbase.net",
+    baseUrl: "https://xxoo521.com",
     pagesDirectory: path.join(__dirname, "..", "out"),
     targetDirectory: path.join(__dirname, "..", "out"),
 });
