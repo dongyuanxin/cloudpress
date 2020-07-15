@@ -10,14 +10,6 @@
             "isRequired": true
         },
         {
-            "fieldLabel": "排序",
-            "fieldName": "order",
-            "fieldType": "Number",
-            "helpText": "值越大在 CMS 列表中越靠前",
-            "hidden": false,
-            "isRequired": true
-        },
-        {
             "fieldLabel": "通知内容",
             "fieldName": "noticeContent",
             "fieldType": "String",
@@ -30,13 +22,6 @@
             "fieldType": "DateTime",
             "hidden": false,
             "isRequired": true
-        },
-        {
-            "fieldLabel": "通知有效期",
-            "fieldName": "noticeExpiration",
-            "fieldType": "Number",
-            "helpText": "单位为「天」，默认有效期为「7天」",
-            "hidden": false
         }
     ],
     "label": "[v1]通知"
