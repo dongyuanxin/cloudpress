@@ -117,17 +117,48 @@ const CustomFooter = ({ style }) => {
                     style={{
                         color: "rgba(255,255,255,.4)",
                         textAlign: "center",
-                        fontSize: "16px",
+                        fontSize: "14px",
                     }}
                 >
-                    Made with
-                    <span style={{ color: "rgb(255, 255, 255)" }}>
-                        &nbsp;❤&nbsp;
+                    本站总访问量
+                    <span
+                        id="busuanzi_container_site_pv"
+                        style={{ color: "rgba(255,255,255,.9)" }}
+                    >
+                        &nbsp;<span id="busuanzi_value_site_pv">...</span>&nbsp;
                     </span>
-                    by
-                    <span style={{ color: "rgba(255,255,255,.9)" }}>
-                        &nbsp;CloudPress
+                    次，本站总访客数
+                    <span
+                        id="busuanzi_container_site_uv"
+                        style={{ color: "rgba(255,255,255,.9)" }}
+                    >
+                        &nbsp;<span id="busuanzi_value_site_uv">...</span>&nbsp;
                     </span>
+                    人
+                </div>
+                <div
+                    style={{
+                        color: "rgba(255,255,255,.4)",
+                        textAlign: "center",
+                        fontSize: "14px",
+                    }}
+                >
+                    由
+                    <a
+                        style={{ color: "rgba(255,255,255,.9)" }}
+                        href="https://github.com/dongyuanxin/cloudpress"
+                        target="_blank"
+                    >
+                        &nbsp;CLOUDPRESS&nbsp;
+                    </a>
+                    打造，在线预览
+                    <a
+                        style={{ color: "rgba(255,255,255,.9)" }}
+                        href="https://xxoo521.com/"
+                        target="_blank"
+                    >
+                        &nbsp;DEMO&nbsp;
+                    </a>
                 </div>
             </Footer>
         </div>
