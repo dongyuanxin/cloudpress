@@ -1,0 +1,10 @@
+.git
+.vscode
+node_modules
+
+/bin
+/frontend
+/database
+
+/service/dist
+/service/test
