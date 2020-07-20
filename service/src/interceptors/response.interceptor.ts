@@ -23,12 +23,19 @@ export class ResponseInterceptor implements NestInterceptor {
         return next.handle().pipe(
             map(result => {
                 console.log(
-                    inspect({
-                        type: 'OutcomingResponse',
-                        requestId: this.tracingService.requestId,
-                        costTime:
-                            Date.now() - this.tracingService.reqTime + ' ms',
-                    }),
+                    inspect(
+                        {
+                            type: 'OutcomingResponse',
+                            requestId: this.tracingService.requestId,
+                            costTime:
+                                Date.now() -
+                                this.tracingService.reqTime +
+                                ' ms',
+                        },
+                        {
+                            breakLength: Infinity,
+                        },
+                    ),
                 );
 
                 return {
