@@ -42,12 +42,17 @@ export class AllExceptionFilter<T> implements ExceptionFilter {
                 : HttpStatus.INTERNAL_SERVER_ERROR;
 
         console.log(
-            inspect({
-                type: 'ExceptionResponse',
-                requestId: this.tracingService.requestId,
-                status,
-                exception,
-            }),
+            inspect(
+                {
+                    type: 'ExceptionResponse',
+                    requestId: this.tracingService.requestId,
+                    status,
+                    exception,
+                },
+                {
+                    breakLength: Infinity,
+                },
+            ),
         );
 
         let msg: any;
