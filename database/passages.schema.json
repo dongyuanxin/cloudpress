@@ -62,6 +62,13 @@
             "hidden": false,
             "fieldLabel": "是否上锁",
             "fieldName": "isLocked"
+        },
+        {
+            "isRequired": true,
+            "fieldLabel": "是否发布",
+            "fieldName": "isPublished",
+            "fieldType": "Boolean",
+            "hidden": false
         }
     ]
 }

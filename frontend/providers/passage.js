@@ -1,6 +1,7 @@
 import { getApp } from "./../helpers/tcb";
 import { getBucketUrl } from "./utils";
 import moment from "moment";
+import { cacheWrapper } from "./../helpers/cache";
 
 /**
  * 统计文章总数
@@ -10,7 +11,11 @@ export async function countPassages() {
     const app = await getApp();
     const collection = app.database().collection("cloudpress-v1-passages");
 
-    const { total } = await collection.where({}).count();
+    const { total } = await collection
+        .where({
+            isPublished: true,
+        })
+        .count();
 
     return total;
 }
@@ -26,7 +31,9 @@ export async function describePassages(limit = 10, page = 1) {
     const collection = app.database().collection("cloudpress-v1-passages");
 
     const { data } = await collection
-        .where({})
+        .where({
+            isPublished: true,
+        })
         .orderBy("publishTime", "desc")
         .skip((page - 1) * limit)
         .limit(limit)
@@ -76,7 +83,9 @@ export async function describePsgIDs() {
     for (let i = 0; i <= Math.floor(total / step); ++i) {
         promises.push(
             collection
-                .where({})
+                .where({
+                    isPublished: true,
+                })
                 .field({ psgID: true })
                 .orderBy("publishTime", "desc")
                 .skip(i * step)
