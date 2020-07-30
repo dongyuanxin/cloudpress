@@ -23,6 +23,7 @@ import {
     ClockCircleOutlined,
     HomeOutlined,
 } from "./../../components/Icon/";
+import { NoticeReq } from './../../requests/notice'
 import Darkmode from "darkmode-js";
 
 const { Header } = Layout;
@@ -39,6 +40,7 @@ const Navigation = ({ style }) => {
     const [searchColWidth, setSearchColWidth] = useState(8);
     const [selectedKeys, setSelectedKeys] = useState([router.route]);
     const [isLightMode, setIsLightMode] = useState(true);
+    const [notices, setNotices] = useState([])
     const nav = [
         {
             title: "首页",
@@ -78,7 +80,17 @@ const Navigation = ({ style }) => {
     useEffect(() => {
         refDarkmode.current = new Darkmode(darkmodeOptions);
         setIsLightMode(localStorage.getItem("darkmode") !== "true");
+
+        getNotices()
     }, []);
+
+    const getNotices = async () => {
+        const { notices } = await NoticeReq.getNotices({
+            size: 5,
+            startTime: Date.now() - 1000 * 60 * 60 * 24 * 100
+        })
+        setNotices(notices)
+    }
 
     return (
         <Header style={style}>
@@ -108,8 +120,8 @@ const Navigation = ({ style }) => {
                                         {item.title}
                                     </a>
                                 ) : (
-                                    <span>{item.title}</span>
-                                )}
+                                        <span>{item.title}</span>
+                                    )}
                             </Menu.Item>
                         ))}
                     </Menu>
@@ -144,7 +156,7 @@ const Navigation = ({ style }) => {
                                 }}
                             />
                             <Button type="text">
-                                <Badge dot={true}>
+                                <Badge count={notices.length} overflowCount={10}>
                                     <BellOutlined
                                         style={{
                                             fontSize: "1.4em",
