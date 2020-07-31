@@ -74,7 +74,7 @@ export class AllExceptionFilter<T> implements ExceptionFilter {
             msg = 'UNKNOWN_ERROR';
         }
 
-        res.status(status).json({
+        res.status(200).json({
             code: status,
             requestId: this.tracingService.requestId,
             msg,
