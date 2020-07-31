@@ -1,5 +1,5 @@
 import { getApp } from "./../helpers/tcb";
-import { getBucketUrl } from "./utils";
+import { getBucketUrl } from "../helpers/utils";
 import moment from "moment";
 import { cacheWrapper } from "./../helpers/cache";
 

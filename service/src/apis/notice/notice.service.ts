@@ -16,7 +16,7 @@ export class NoticeService {
 
         const { data } = await collection
             .where({
-                noticeTime: db.command.gte(new Date(startTime)),
+                noticeTime: db.command.gt(new Date(startTime)),
             })
             .orderBy('noticeTime', 'desc')
             .limit(size)

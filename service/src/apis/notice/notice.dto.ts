@@ -16,10 +16,13 @@ export class DescribeNoticesDto {
     @Min(1)
     readonly startTime: number;
 
-    @Transform(value => parseInt(value, 10))
+    @Transform(value => {
+        value = parseInt(value, 10);
+        return value > 100 ? 100 : value;
+    })
     @IsOptional()
     @IsInt()
-    @Max(10)
+    @Max(100)
     @Min(1)
     readonly size = 5;
 }
