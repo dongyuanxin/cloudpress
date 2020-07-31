@@ -7,7 +7,8 @@
         "commit": "git-cz",
         "init:db": "./bin/init-db",
         "login": "./bin/login.sh",
-        "deploy:frontend": "./bin/deploy-frontend.sh"
+        "deploy:frontend": "./bin/deploy-frontend.sh",
+        "zip:service": "cd service/ && zip service.zip -r ./ -x node_modules/\\* dist/\\* test/\\* && cd -"
     },
     "husky": {
         "hooks": {
