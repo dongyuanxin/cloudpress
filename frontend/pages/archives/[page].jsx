@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { message, Row, Col, Switch, Pagination } from "antd";
 import _ from "lodash";
-import removeMd from "remove-markdown";
 import SeoHead from "./../../components/SeoHead/";
 import { countPassages, describePassages } from "./../../providers/passage";
 
@@ -158,10 +157,10 @@ export async function getStaticProps({ params }) {
             passages: passages.map((passage, index) => {
                 passage.index = (page - 1) * PAGE_SIZE + index + 1;
                 passage.description =
-                    removeMd(passage.content || "")
+                    (passage.content || "")
                         .replace(/\n/g, "")
                         .trim()
-                        .slice(0, 100) + ".....";
+                        .slice(0, 155) + ".....";
                 return _.omit(passage, ["updateTime", "createTime", "content"]);
             }),
         },
