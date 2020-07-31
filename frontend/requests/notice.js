@@ -1,18 +1,18 @@
-import axios from 'axios'
+import axios from "axios";
 
 export class NoticeReq {
     static async getNotices(params) {
-        const { startTime, size } = params
+        const { startTime, size } = params;
 
         const config = {
             headers: {
                 "Content-Type": "application/json",
             },
             method: "get",
-            url: `//localhost/notice?startTime=${startTime}&size=${size}`,
-        }
+            url: `//env-nxwksyfx.service.tcloudbase.com/service/notice?startTime=${startTime}&size=${size}`,
+        };
 
-        const axiosRes = await axios(config)
-        return axiosRes.data.result
+        const axiosRes = await axios(config);
+        return axiosRes.data.result;
     }
 }
