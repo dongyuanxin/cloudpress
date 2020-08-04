@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import _ from "lodash";
 import * as prettier from "prettier";
-import removeMd from "remove-markdown";
 import { Anchor, Row, Col } from "antd";
 import { md, parseAnchors } from "../helpers/markdown";
 import SeoHead from "./../components/SeoHead/";
@@ -76,8 +75,7 @@ export async function getStaticProps({ params }) {
         props: {
             contentHtml,
             description:
-                removeMd(content).replace(/\n/g, "").trim().slice(0, 155) +
-                "...",
+                content.replace(/\n/g, "").trim().slice(0, 155) + "...",
             passage: _.omit(passage, [
                 "updateTime",
                 "createTime",
