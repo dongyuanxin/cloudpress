@@ -5,9 +5,9 @@
     "main": "index.js",
     "scripts": {
         "commit": "git-cz",
-        "init:db": "./bin/init-db",
-        "login": "./bin/login.sh",
-        "deploy:frontend": "./bin/deploy-frontend.sh",
+        "init:db": "node ./bin/init-db",
+        "login": "sh ./bin/login.sh",
+        "deploy:frontend": "sh ./bin/deploy-frontend.sh",
         "zip:service": "cd service/ && zip service.zip -r ./ -x node_modules/\\* dist/\\* test/\\* && cd -"
     },
     "husky": {
