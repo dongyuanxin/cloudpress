@@ -15,7 +15,7 @@ const ArchievePage = ({ passages, total, page }) => {
         return (
             <a
                 target="_self"
-                href={`/${psgID}/`}
+                href={`/${psgID}`}
                 style={{ display: "block" }}
                 key={index}
             >
@@ -66,7 +66,7 @@ const ArchievePage = ({ passages, total, page }) => {
         function itemRender(current, type, originalElement) {
             if (type === "page") {
                 return (
-                    <a target="_self" href={`/archives/${current}/`}>
+                    <a target="_self" href={`/archives/${current}`}>
                         {current}
                     </a>
                 );

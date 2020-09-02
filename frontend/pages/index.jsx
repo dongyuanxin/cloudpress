@@ -25,7 +25,7 @@ export default function Home() {
                             </a>
                         </div>
                         <div className="page-home-btn">
-                            <a href="/archives/1/" target="_self">
+                            <a href="/archives/1" target="_self">
                                 进入博客
                             </a>
                         </div>
