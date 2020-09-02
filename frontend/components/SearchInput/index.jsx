@@ -97,7 +97,7 @@ const SearchInput = () => {
                 ))}
                 <div
                     className="cp-search-input-btn"
-                    onClick={() => searchResult(value || "", page + 1)}
+                    onClick={() => searchResultDebounced(value || "", page + 1)}
                 >
                     {loadContent}
                 </div>
