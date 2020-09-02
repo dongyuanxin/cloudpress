@@ -6,7 +6,6 @@ import {
     Col,
     Tooltip,
     Button,
-    Input,
     Badge,
     message,
     Switch,
@@ -20,10 +19,10 @@ import {
     CommentOutlined,
     BellOutlined,
     GithubOutlined,
-    SearchOutlined,
     ClockCircleOutlined,
     HomeOutlined,
 } from "./../../components/Icon/";
+import SearchInput from "./../../components/SearchInput";
 import { NoticeReq } from "./../../requests/notice";
 import { formatISOString } from "./../../helpers/utils";
 import Darkmode from "darkmode-js";
@@ -57,7 +56,7 @@ const Navigation = ({ style }) => {
             key: "/archives/[page]",
             icon: <CoffeeOutlined />,
             disabled: false,
-            link: "/archives/1/",
+            link: "/archives/1",
         },
         {
             title: "小册",
@@ -201,15 +200,7 @@ const Navigation = ({ style }) => {
                 <Col span={12}>
                     <Row justify="end" gutter={12}>
                         <Col span={8}>
-                            <Input
-                                placeholder="输入关键词搜索"
-                                style={{ borderRadius: "16px" }}
-                                suffix={
-                                    <SearchOutlined
-                                        style={{ cursor: "pointer" }}
-                                    />
-                                }
-                            />
+                            <SearchInput />
                         </Col>
                         <Col
                             span={8}

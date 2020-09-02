@@ -11,6 +11,8 @@ import { LogMiddleware } from './middlewares/log.middleware';
 import { APP_INTERCEPTOR, APP_FILTER } from '@nestjs/core';
 import { ResponseInterceptor } from './interceptors/response.interceptor';
 import { AllExceptionFilter } from './filters/all-exception.filter';
+import { SearchController } from './apis/search/search.controller';
+import { SearchService } from './apis/search/search.service';
 
 configInstance.loadConfig();
 
@@ -22,7 +24,7 @@ configInstance.loadConfig();
             secretKey: configInstance.read('TCB_SECRET_KEY'),
         }),
     ],
-    controllers: [AppController, SeoController, NoticeController],
+    controllers: [AppController, SeoController, NoticeController, SearchController],
     providers: [
         AppService,
         NoticeService,
@@ -35,6 +37,7 @@ configInstance.loadConfig();
             provide: APP_FILTER,
             useClass: AllExceptionFilter,
         },
+        SearchService,
     ],
 })
 export class AppModule implements NestModule {
