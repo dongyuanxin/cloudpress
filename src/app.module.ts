@@ -7,7 +7,7 @@ import { configInstance } from './env';
 import { TcbModule } from './common/tcb/tcb.module';
 import { NoticeService } from './apis/notice/notice.service';
 import { TracingService } from './common/tracing/tracing.service';
-import { LogMiddleware } from './middlewares/log.middleware';
+import { ClsMiddleware } from './middlewares/cls.middleware';
 import { APP_INTERCEPTOR, APP_FILTER } from '@nestjs/core';
 import { ResponseInterceptor } from './interceptors/response.interceptor';
 import { AllExceptionFilter } from './filters/all-exception.filter';
@@ -44,6 +44,7 @@ configInstance.loadConfig();
 })
 export class AppModule implements NestModule {
     configure(consumer: MiddlewareConsumer) {
-        consumer.apply(LogMiddleware).forRoutes('*');
+        const globalMiddlewares = [ClsMiddleware];
+        consumer.apply(...globalMiddlewares).forRoutes('*');
     }
 }
