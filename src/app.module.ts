@@ -6,7 +6,6 @@ import { NoticeController } from './apis/notice/notice.controller';
 import { configInstance } from './env';
 import { TcbModule } from './common/tcb/tcb.module';
 import { NoticeService } from './apis/notice/notice.service';
-import { TracingService } from './common/tracing/tracing.service';
 import { ClsMiddleware } from './middlewares/cls.middleware';
 import { APP_INTERCEPTOR, APP_FILTER } from '@nestjs/core';
 import { ResponseInterceptor } from './interceptors/response.interceptor';
@@ -29,7 +28,6 @@ configInstance.loadConfig();
     providers: [
         AppService,
         NoticeService,
-        TracingService,
         {
             provide: APP_INTERCEPTOR,
             useClass: ResponseInterceptor,
