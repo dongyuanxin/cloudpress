@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { DescribeNoticesReturn } from './notice.interface';
 import { TcbService } from 'src/common/tcb/tcb.service';
-import { COLLECTION_NOTICES } from './../../contants';
+import { COLLECTION_NOTICES } from './../../constants/'
 
 @Injectable()
 export class NoticeService {
-    constructor(private tcbService: TcbService) {}
+    constructor(private tcbService: TcbService) { }
 
     async describeNotices(
         startTime: number,

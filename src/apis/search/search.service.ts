@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { TcbService } from 'src/common/tcb/tcb.service';
-import { COLLECTION_PASSAGES } from './../../contants';
+import { COLLECTION_PASSAGES } from './../../constants/';
 import { SearchPassagesReturn } from './search.interface';
 
 @Injectable()
 export class SearchService {
-    constructor(private tcbService: TcbService) {}
+    constructor(private tcbService: TcbService) { }
 
     async searchPassages(
         page: number,
