@@ -13,6 +13,7 @@ import { ResponseInterceptor } from './interceptors/response.interceptor';
 import { AllExceptionFilter } from './filters/all-exception.filter';
 import { SearchController } from './apis/search/search.controller';
 import { SearchService } from './apis/search/search.service';
+import { LoggerService } from './services/logger.service';
 
 configInstance.loadConfig();
 
@@ -38,6 +39,7 @@ configInstance.loadConfig();
             useClass: AllExceptionFilter,
         },
         SearchService,
+        LoggerService,
     ],
 })
 export class AppModule implements NestModule {
