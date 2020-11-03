@@ -1,5 +1,3 @@
-// 存放通知的集合名
-export const COLLECTION_NOTICES = 'cloudpress-v1-notices';
+export * from './collection';
 
-// 存放文档的集合名
-export const COLLECTION_PASSAGES = 'cloudpress-v1-passages';
+export * from './server';
