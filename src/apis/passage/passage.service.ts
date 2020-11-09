@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PassageSchema } from './passage.interface';
+import { NOTES_FOLDER } from './../../constants'
 import * as fs from 'fs'
 import * as path from 'path'
 import * as moment from 'moment'
@@ -20,7 +21,7 @@ export class PassageService {
     constructor(
         private readonly loggerService: LoggerService
     ) {
-        this.folderName = process.cwd() + '/notes'
+        this.folderName = NOTES_FOLDER
         this.mdRe = /(---\n((.|\n)*?)\n---\n)?((.|\n)*)/
         this.validNameRe = /^\d+\./
         this.timeFormat = 'YYYY-MM-DD HH:mm:ss'
@@ -29,9 +30,10 @@ export class PassageService {
 
     public async load(asc: boolean = false) {
         if (!fs.existsSync(this.folderName)) {
-            throw new Error(`${this.folderName} is invalid`)
+            throw new Error(`Load passage fail: ${this.folderName} is invalid`)
         }
 
+        this.loggerService.info({ content: 'Start load passage' })
         this.passages = []
         await this._load(this.folderName)
         if (asc) {
@@ -47,6 +49,7 @@ export class PassageService {
                 return 0
             })
         }
+        this.loggerService.info({ content: `Finish load ${this.passages.length} valid passages` })
         return this.passages
     }
 
