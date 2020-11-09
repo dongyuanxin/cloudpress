@@ -53,6 +53,22 @@ export class PassageService {
         return this.passages
     }
 
+    public describePassageById(psgId: string): PassageSchema {
+        return this.passages.find(item => item.permalink === psgId)
+    }
+
+    public describePassages(limit: number = 10, page: number = 1): PassageSchema[] {
+        return this.passages.slice((page - 1) * limit, page * limit)
+    }
+
+    public countAllPassages(): number {
+        return this.passages.length
+    }
+
+    public describeAllPassageIds(): string[] {
+        return this.passages.map(item => item.permalink)
+    }
+
     private async _load(parentPath: string) {
         const folders = await fsPromises.readdir(parentPath);
 
