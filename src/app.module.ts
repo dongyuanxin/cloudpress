@@ -13,6 +13,8 @@ import { AllExceptionFilter } from './filters/all-exception.filter';
 import { SearchController } from './apis/search/search.controller';
 import { SearchService } from './apis/search/search.service';
 import { LoggerService } from './services/logger.service';
+import { PassageController } from './apis/passage/passage.controller'
+import { PassageService } from './apis/passage/passage.service'
 
 configInstance.loadConfig();
 
@@ -24,7 +26,7 @@ configInstance.loadConfig();
             secretKey: configInstance.read('TCB_SECRET_KEY'),
         }),
     ],
-    controllers: [AppController, SeoController, NoticeController, SearchController],
+    controllers: [AppController, SeoController, NoticeController, SearchController, PassageController],
     providers: [
         AppService,
         NoticeService,
@@ -38,6 +40,7 @@ configInstance.loadConfig();
         },
         SearchService,
         LoggerService,
+        PassageService
     ],
 })
 export class AppModule implements NestModule {
