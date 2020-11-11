@@ -84,8 +84,9 @@ export class PassageService {
                 try {
                     this.passages.push(await this.parseFile(folderPath))
                 } catch (error) {
-                    this.loggerService.warn({
-                        content: `Warning: ${folderPath} parse failed.`
+                    this.loggerService.error({
+                        content: `Warning: ${folderPath} parse failed.`,
+                        errMsg: error.message
                     })
                 }
             } else if (stat.isDirectory()) {
@@ -132,7 +133,12 @@ export class PassageService {
             return moment().format(this.timeFormat)
         }
 
-        let res = moment(timeStr).format(this.timeFormat)
+        const instance = moment(timeStr, true)
+        if (!instance.isValid()) {
+            throw new Error(`frontmatter.date is valid`)
+        }
+
+        const res = instance.format(this.timeFormat)
         if (res.toLowerCase().includes('invalid')) {
             return moment().format(this.timeFormat)
         } else {
