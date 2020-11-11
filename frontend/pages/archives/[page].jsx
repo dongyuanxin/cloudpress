@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { message, Row, Col, Switch, Pagination } from "antd";
 import _ from "lodash";
 import SeoHead from "./../../components/SeoHead/";
-import { countPassages, describePassages } from "./../../providers/passage";
+import { PassageProvider } from "./../../providers/passage";
 
 const PAGE_SIZE = 10; // 每页大小
 
@@ -10,12 +10,12 @@ const ArchievePage = ({ passages, total, page }) => {
     const [easyMode, setEasyMode] = useState(true);
 
     const renderPassage = (passage) => {
-        const { title, description, index, publishTime, psgID } = passage;
+        const { title, description, index, date, permalink } = passage;
 
         return (
             <a
                 target="_self"
-                href={`/${psgID}`}
+                href={`/${permalink}`}
                 style={{ display: "block" }}
                 key={index}
             >
@@ -54,7 +54,7 @@ const ArchievePage = ({ passages, total, page }) => {
                         <MessageOutlined style={{marginRight: '5px'}}/>0
                     </span> */}
                         <span className="page-archive-psg-info">
-                            {publishTime}
+                            {date}
                         </span>
                     </Col>
                 </Row>
@@ -128,7 +128,7 @@ const ArchievePage = ({ passages, total, page }) => {
 export default ArchievePage;
 
 export async function getStaticPaths() {
-    const total = await countPassages();
+    const total = await PassageProvider.countPassages();
     const pageNum = Math.ceil(total / PAGE_SIZE);
     const paths = [];
     for (let i = 0; i < pageNum; ++i) {
@@ -145,9 +145,9 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    const total = await countPassages();
+    const total = await PassageProvider.countPassages();
     const page = parseInt(params.page);
-    const passages = await describePassages(PAGE_SIZE, page);
+    const passages = await PassageProvider.describePassages(PAGE_SIZE, page)
 
     return {
         props: {
@@ -156,12 +156,7 @@ export async function getStaticProps({ params }) {
             page,
             passages: passages.map((passage, index) => {
                 passage.index = (page - 1) * PAGE_SIZE + index + 1;
-                passage.description =
-                    (passage.content || "")
-                        .replace(/\n/g, "")
-                        .trim()
-                        .slice(0, 155) + ".....";
-                return _.omit(passage, ["updateTime", "createTime", "content"]);
+                return _.omit(passage, ["filepath", "content", "mtime"]);
             }),
         },
     };
