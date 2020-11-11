@@ -11,5 +11,13 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "incremental": true
-  }
+  },
+  "exclude": [
+    "dist",
+    "frontend",
+    "notes",
+    "database",
+    "bin",
+    ".vscode"
+  ]
 }

@@ -38,6 +38,6 @@ export class PassageController {
 
     @Get('describe-all-passage-ids')
     async describeAllPassageIds() {
-        return await this.passageService.describePassages()
+        return await this.passageService.describeAllPassageIds()
     }
 }
