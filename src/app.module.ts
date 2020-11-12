@@ -3,8 +3,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { SeoController } from './apis/seo/seo.controller';
 import { NoticeController } from './apis/notice/notice.controller';
-import { configInstance } from './env';
-import { TcbModule } from './common/tcb/tcb.module';
 import { NoticeService } from './apis/notice/notice.service';
 import { ClsMiddleware } from './middlewares/cls.middleware';
 import { APP_INTERCEPTOR, APP_FILTER } from '@nestjs/core';
@@ -17,17 +15,9 @@ import { PassageController } from './apis/passage/passage.controller';
 import { PassageService } from './apis/passage/passage.service';
 import { LocalCacheService } from './services/local-cache.service';
 import { EnvService } from './services/env.service';
-
-configInstance.loadConfig();
+import { TcbService } from './services/tcb.service'
 
 @Module({
-    imports: [
-        TcbModule.forRoot({
-            env: configInstance.read('ENV_ID'),
-            secretId: configInstance.read('TCB_SECRET_ID'),
-            secretKey: configInstance.read('TCB_SECRET_KEY'),
-        }),
-    ],
     controllers: [
         AppController,
         SeoController,
@@ -51,6 +41,7 @@ configInstance.loadConfig();
         PassageService,
         LocalCacheService,
         EnvService,
+        TcbService
     ],
 })
 export class AppModule implements NestModule {

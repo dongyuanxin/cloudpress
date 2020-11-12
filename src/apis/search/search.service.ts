@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { TcbService } from 'src/common/tcb/tcb.service';
+import { TcbService } from './../../services/tcb.service';
 import { COLLECTION_PASSAGES } from './../../constants/';
 import { SearchPassagesReturn } from './search.interface';
 
