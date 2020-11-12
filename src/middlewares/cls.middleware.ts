@@ -12,7 +12,7 @@ export class ClsMiddleware implements NestMiddleware {
             requestId: uuidV4(),
             requestTime: Date.now(),
             requestMethod: req.method,
-            requestPath: req.path,
+            requestPath: req.originalUrl,
             requestHostname: req.hostname,
         };
 
