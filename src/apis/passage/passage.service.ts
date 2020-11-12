@@ -109,12 +109,14 @@ export class PassageService {
         const [, , yamlContent, , mdContent] = this.mdRe.exec(content)
         const yamlInfo = yaml.safeLoad(yamlContent)
 
-        if (yamlInfo) {
+        if (yamlInfo && yamlInfo.permalink) {
             let mtimeStr = this.formatDate(yamlInfo.date)
             let formatMdContent = prettier.format(mdContent, { parser: 'markdown' })
+            let filename = this.parseName(filepath)
             return {
+                filename,
                 filepath,
-                title: yamlInfo.title,
+                title: yamlInfo.title || filename,
                 content: formatMdContent,
                 description: formatMdContent
                     .replace(/\n/g, "")
@@ -125,7 +127,18 @@ export class PassageService {
                 permalink: yamlInfo.permalink
             }
         }
-        throw new Error(`${filepath} is invalid`)
+        throw new Error(`${filepath}'s frontmatter is invalid`)
+    }
+
+    private parseName(filepath: string): string {
+        const info = path.parse(filepath)
+        if (info.name.toLocaleLowerCase() !== 'readme') {
+            return info.name
+        } else {
+            // /workhome/notes/patha/pathb/06.云开发.md
+            // => 云开发
+            return info.dir.split(path.sep).pop().replace(/^\d*?\./, '')
+        }
     }
 
     private formatDate(timeStr): string {

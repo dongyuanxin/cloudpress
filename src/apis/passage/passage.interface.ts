@@ -1,5 +1,6 @@
 export interface PassageSchema {
     filepath: string
+    filename: string
     title: string
     content: string
     description: string
