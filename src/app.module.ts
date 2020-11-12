@@ -16,6 +16,7 @@ import { LoggerService } from './services/logger.service';
 import { PassageController } from './apis/passage/passage.controller';
 import { PassageService } from './apis/passage/passage.service';
 import { LocalCacheService } from './services/local-cache.service';
+import { EnvService } from './services/env.service';
 
 configInstance.loadConfig();
 
@@ -49,6 +50,7 @@ configInstance.loadConfig();
         LoggerService,
         PassageService,
         LocalCacheService,
+        EnvService,
     ],
 })
 export class AppModule implements NestModule {
