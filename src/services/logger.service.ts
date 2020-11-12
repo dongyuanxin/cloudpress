@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { asyncLocalStorage } from './../utils/'
+import { asyncLocalStorage } from './../utils/';
 
 export type LogLevel = 'info' | 'error' | 'warn';
 
@@ -26,15 +26,20 @@ export interface LogInfo {
     httpClientRes?: string;
     httpClientCostTime?: number;
 
+    // 缓存信息
+    cacheType?: 'local' | 'redis';
+    cacheOperation?: 'create' | 'del' | 'hit' | 'miss';
+    cacheKey?: string;
+    cacheValue?: string;
+
     // 其他信息
     costTime?: number;
     content?: string;
 }
 
-
 @Injectable()
 export class LoggerService {
-    constructor() { }
+    constructor() {}
 
     public info(logInfo: LogInfo) {
         this.print({

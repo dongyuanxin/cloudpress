@@ -30,6 +30,7 @@
         "dotenv": "^8.2.0",
         "js-yaml": "^3.14.0",
         "moment": "^2.29.1",
+        "quick-lru": "^5.1.1",
         "reflect-metadata": "^0.1.13",
         "rimraf": "^3.0.2",
         "rxjs": "^6.5.4",
