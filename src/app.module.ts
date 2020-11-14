@@ -12,10 +12,12 @@ import { SearchController } from './apis/search/search.controller';
 import { SearchService } from './apis/search/search.service';
 import { LoggerService } from './services/logger.service';
 import { PassageController } from './apis/passage/passage.controller';
+import { TimesController } from './apis/times/times.controller'
 import { PassageService } from './apis/passage/passage.service';
 import { LocalCacheService } from './services/local-cache.service';
 import { EnvService } from './services/env.service';
-import { TcbService } from './services/tcb.service'
+import { TcbService } from './services/tcb.service';
+import { TimesService } from './apis/times/times.service'
 
 @Module({
     controllers: [
@@ -24,6 +26,7 @@ import { TcbService } from './services/tcb.service'
         NoticeController,
         SearchController,
         PassageController,
+        TimesController
     ],
     providers: [
         AppService,
@@ -41,7 +44,8 @@ import { TcbService } from './services/tcb.service'
         PassageService,
         LocalCacheService,
         EnvService,
-        TcbService
+        TcbService,
+        TimesService
     ],
 })
 export class AppModule implements NestModule {
