@@ -3,6 +3,8 @@ import { TimesService } from './times.service';
 import { Request, Response } from 'express';
 import { asyncLocalStorage } from '../../utils';
 
+// todo：接口设计有问题
+//      需要参考busuanzi统计返回
 @Controller('times')
 export class TimesController {
     private readonly viewerTimesCookieKey: string
@@ -18,8 +20,8 @@ export class TimesController {
     @Get('view')
     async logView(@Req() req: Request) {
         const cls = asyncLocalStorage.getStore()
-        const times = await this.timesService.logView(cls.requestHostname, req.path)
-        return times
+        const pagePv = await this.timesService.logView(cls.requestHostname, req.path)
+        return pagePv
     }
 
     // 注：在 controller 中使用 @Res，需要自己调用 res.end()，否则服务会 handling
