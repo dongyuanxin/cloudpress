@@ -1,0 +1,20 @@
+{
+    "collectionName": "cloudpress-v1-viewers",
+    "label": "[v1]访问人数",
+    "fields": [
+        {
+            "fieldName": "hostname",
+            "fieldType": "String",
+            "hidden": false,
+            "isRequired": true,
+            "fieldLabel": "域名"
+        },
+        {
+            "isRequired": true,
+            "fieldLabel": "总人数",
+            "fieldName": "times",
+            "fieldType": "Number",
+            "hidden": false
+        }
+    ]
+}

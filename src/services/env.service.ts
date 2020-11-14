@@ -9,6 +9,7 @@ const ENV_KEYS = {
     TCB_ENV_ID: 'TCB_ENV_ID',
     TCLOUD_SECRET_ID: 'TCLOUD_SECRET_ID',
     TCLOUD_SECRET_KEY: 'TCLOUD_SECRET_KEY',
+    TOKEN_SECRET: 'TOKEN_SECRET'
 } as const;
 
 export type ENV_KEYS_TYPE = keyof typeof ENV_KEYS;
