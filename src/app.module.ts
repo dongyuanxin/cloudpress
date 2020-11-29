@@ -17,6 +17,7 @@ import { PassageService } from './apis/passage/passage.service';
 import { LocalCacheService } from './services/local-cache.service';
 import { EnvService } from './services/env.service';
 import { TcbService } from './services/tcb.service';
+import { AsyncLimitService } from './services/async-limit.service';
 import { TimesService } from './apis/times/times.service'
 
 @Module({
@@ -45,6 +46,7 @@ import { TimesService } from './apis/times/times.service'
         LocalCacheService,
         EnvService,
         TcbService,
+        AsyncLimitService,
         TimesService
     ],
 })
