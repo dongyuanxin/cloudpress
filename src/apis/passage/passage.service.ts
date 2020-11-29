@@ -1,17 +1,24 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Scope } from '@nestjs/common';
 import { PassageSchema } from './passage.interface';
-import { NOTES_FOLDER } from './../../constants'
+import { NOTES_FOLDER, COLLECTION_PASSAGES } from './../../constants'
 import * as fs from 'fs'
 import * as path from 'path'
 import * as moment from 'moment'
 import * as yaml from 'js-yaml'
 import * as prettier from 'prettier'
 import { LoggerService } from 'src/services/logger.service';
+import { TcbService } from 'src/services/tcb.service';
+import { AsyncLimitService } from 'src/services/async-limit.service';
+
+import { EventEmitter } from 'events';
 
 const fsPromises = fs.promises;
+let uploaded = false;
 
-@Injectable()
-export class PassageService {
+@Injectable({
+    scope: Scope.DEFAULT
+})
+export class PassageService extends EventEmitter {
     private readonly folderName: string
     private readonly mdRe: RegExp
     private readonly validNameRe: RegExp
@@ -19,13 +26,20 @@ export class PassageService {
     private passages: PassageSchema[]
 
     constructor(
-        private readonly loggerService: LoggerService
+        private readonly loggerService: LoggerService,
+        private readonly tcbService: TcbService,
+        private readonly asyncLimitService: AsyncLimitService
     ) {
+        super()
         this.folderName = NOTES_FOLDER
         this.mdRe = /(---\n((.|\n)*?)\n---\n)?((.|\n)*)/
         this.validNameRe = /^\d+\./
         this.timeFormat = 'YYYY-MM-DD HH:mm:ss'
         this.passages = []
+
+        this.asyncLimitService.init('passage', 10)
+
+        this.on('upload', this.onUpload)
     }
 
     public async load(asc: boolean = false) {
@@ -33,9 +47,12 @@ export class PassageService {
             throw new Error(`Load passage fail: ${this.folderName} is invalid`)
         }
 
-        this.loggerService.info({ content: 'Start load passage' })
+        this.loggerService.info({ content: 'Start load passage', logType: 'LoadPassageStart' })
         this.passages = []
+
         await this._load(this.folderName)
+        this.emit('upload')
+
         if (asc) {
             this.passages.sort((a, b) => {
                 if (a.date < b.date) return -1
@@ -49,7 +66,7 @@ export class PassageService {
                 return 0
             })
         }
-        this.loggerService.info({ content: `Finish load ${this.passages.length} valid passages` })
+        this.loggerService.info({ content: `Finish load ${this.passages.length} valid passages`, logType: 'LoadPassageSuccess' })
         return this.passages
     }
 
@@ -92,6 +109,38 @@ export class PassageService {
             } else if (stat.isDirectory()) {
                 await this._load(folderPath)
             }
+        }
+    }
+
+    private async onUpload() {
+        if (uploaded) {
+            return this.loggerService.info({
+                logType: 'UploadRepeated',
+                content: 'Please close and rerun server'
+            })
+        }
+
+        const promises = []
+        const { pLimit } = this.asyncLimitService.get('passage')
+        for (const passage of this.passages) {
+            promises.push(pLimit(() => this.updatePassage(passage)))
+        }
+        await Promise.all(promises)
+        this.loggerService.info({
+            logType: 'UploadSuccess'
+        })
+    }
+
+    /**
+     * permalink 是唯一索引
+     */
+    private async updatePassage(passage: PassageSchema) {
+        const collection = this.tcbService.getCollection(COLLECTION_PASSAGES)
+        const res1 = await collection.where({ permalink: passage.permalink }).get()
+        if (res1.data.length) {
+            await collection.doc(res1.data[0]._id).update(passage)
+        } else {
+            await collection.add(passage)
         }
     }
 
