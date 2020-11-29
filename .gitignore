@@ -45,4 +45,8 @@ lerna-debug.log*
 # cloudbase error file
 cloudbase-error.log
 
+# notes folder
 notes
+
+# temp folder
+tmp

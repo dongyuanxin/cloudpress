@@ -30,6 +30,7 @@
         "cookie-parser": "^1.4.5",
         "dotenv": "^8.2.0",
         "js-yaml": "^3.14.0",
+        "jsonwebtoken": "^8.5.1",
         "lodash": "^4.17.20",
         "moment": "^2.29.1",
         "quick-lru": "^5.1.1",
