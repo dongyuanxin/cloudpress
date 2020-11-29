@@ -24,6 +24,7 @@ import {
 } from "./../../components/Icon/";
 import SearchInput from "./../../components/SearchInput";
 import { NoticeReq } from "./../../requests/notice";
+import { TimesReq } from './../../requests/times'
 import { formatISOString } from "./../../helpers/utils";
 import Darkmode from "darkmode-js";
 
@@ -84,6 +85,7 @@ const Navigation = ({ style }) => {
         refDarkmode.current = new Darkmode(darkmodeOptions);
         setIsLightMode(localStorage.getItem("darkmode") !== "true");
 
+        TimesReq.view(router.pathname)
         getNotices();
     }, []);
 
@@ -191,8 +193,8 @@ const Navigation = ({ style }) => {
                                         {item.title}
                                     </a>
                                 ) : (
-                                    <span>{item.title}</span>
-                                )}
+                                        <span>{item.title}</span>
+                                    )}
                             </Menu.Item>
                         ))}
                     </Menu>

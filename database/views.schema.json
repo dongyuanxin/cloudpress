@@ -1,0 +1,27 @@
+{
+    "collectionName": "cloudpress-v1-views",
+    "label": "[v1]访问次数",
+    "fields": [
+        {
+            "fieldName": "hostname",
+            "fieldType": "String",
+            "hidden": false,
+            "isRequired": true,
+            "fieldLabel": "域名"
+        },
+        {
+            "fieldType": "String",
+            "hidden": false,
+            "isRequired": true,
+            "fieldLabel": "访问路径",
+            "fieldName": "path"
+        },
+        {
+            "isRequired": true,
+            "fieldLabel": "总次数",
+            "fieldName": "times",
+            "fieldType": "Number",
+            "hidden": false
+        }
+    ]
+}

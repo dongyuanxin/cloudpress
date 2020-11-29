@@ -9,16 +9,16 @@ import "highlight.js/styles/atom-one-light.css";
 
 const { Content } = Layout;
 
-if (process.browser) {
-    const targetProtocol = "https:";
-    if (
-        process.env.NODE_ENV !== "development" &&
-        window.location.protocol !== targetProtocol
-    ) {
-        window.location.href =
-            targetProtocol + window.location.href.slice(targetProtocol.length);
-    }
-}
+// if (process.browser) {
+//     const targetProtocol = "https:";
+//     if (
+//         process.env.NODE_ENV !== "development" &&
+//         window.location.protocol !== targetProtocol
+//     ) {
+//         window.location.href =
+//             targetProtocol + window.location.href.slice(targetProtocol.length);
+//     }
+// }
 
 // This default export is required in a new `pages/_app.js` file.
 export default function MyApp({ Component, pageProps }) {

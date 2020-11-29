@@ -1,11 +1,9 @@
 import React, { useEffect } from "react";
 import _ from "lodash";
-import * as prettier from "prettier";
 import { Anchor, Row, Col } from "antd";
 import { md, parseAnchors } from "../helpers/markdown";
 import SeoHead from "./../components/SeoHead/";
-import { describePsgIDs, describePassage } from "./../providers/passage";
-import anchor from "markdown-it-anchor";
+import { PassageProvider } from "./../providers/passage";
 
 const { Link } = Anchor;
 
@@ -53,7 +51,7 @@ const BlogPage = ({ contentHtml, passage, description, anchors }) => {
 export default BlogPage;
 
 export async function getStaticPaths() {
-    const psgIDs = await describePsgIDs();
+    const psgIDs = await PassageProvider.describePsgIDs();
     const paths = psgIDs.map((psgID) => ({
         params: {
             psgID,
@@ -67,21 +65,18 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    const passage = await describePassage(params.psgID);
-    const content = prettier.format(passage.content, { parser: "markdown" });
+    const passage = await PassageProvider.describePassage(params.psgID);
+    const { content, description } = passage;
     const contentHtml = md.render(content);
 
     return {
         props: {
             contentHtml,
-            description:
-                content.replace(/\n/g, "").trim().slice(0, 155) + "...",
+            description,
             passage: _.omit(passage, [
-                "updateTime",
-                "createTime",
+                "filepath",
+                "mtime",
                 "content",
-                "id",
-                "_id",
             ]),
             anchors: parseAnchors(contentHtml),
         },

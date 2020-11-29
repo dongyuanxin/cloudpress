@@ -1,5 +1,7 @@
 import axios from "axios";
 
+const baseUrl = '//127.0.0.1'
+
 export class SearchReq {
     static async searchPassages(params) {
         const config = {
@@ -7,7 +9,7 @@ export class SearchReq {
                 "Content-Type": "application/json",
             },
             method: "post",
-            url: `//service.xxoo521.com/apis/search/passages`,
+            url: `${baseUrl}/search/passages`,
             data: params,
         };
 
