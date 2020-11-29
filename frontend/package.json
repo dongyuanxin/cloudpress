@@ -14,7 +14,7 @@
         "antd": "4.3.1",
         "axios": "^0.19.2",
         "darkmode-js": "^1.5.6",
-        "highlight.js": "^10.0.3",
+        "highlight.js": "^10.1.2",
         "jsdom": "^16.2.2",
         "lodash": "^4.17.20",
         "markdown-it": "^11.0.0",
