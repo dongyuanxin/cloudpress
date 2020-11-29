@@ -19,9 +19,10 @@ export class SearchService {
         const rule = new RegExp(keywords.join('|'));
 
         const query = _.and([
-            {
-                isPublished: true,
-            },
+            // todo
+            // {
+            //     isPublished: true,
+            // },
             _.or([{ content: rule }, { title: rule }]),
         ]);
 

@@ -142,6 +142,13 @@ export class PassageService extends EventEmitter {
         } else {
             await collection.add(passage)
         }
+        this.loggerService.info({
+            logType: 'UpdatePassageSuccess',
+            content: JSON.stringify({
+                title: passage.title,
+                id: passage.permalink
+            })
+        })
     }
 
     private isValidName(name: string): boolean {
