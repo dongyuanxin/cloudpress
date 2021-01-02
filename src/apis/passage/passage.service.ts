@@ -1,5 +1,5 @@
 import { Injectable, Scope } from '@nestjs/common';
-import { PassageSchema } from './passage.interface';
+import { PassageSchema, PassageNode } from './passage.interface';
 import { NOTES_FOLDER, COLLECTION_PASSAGES } from './../../constants'
 import * as fs from 'fs'
 import * as path from 'path'
@@ -24,6 +24,7 @@ export class PassageService extends EventEmitter {
     private readonly validNameRe: RegExp
     private readonly timeFormat: string
     private passages: PassageSchema[]
+    private passageTree: PassageNode
 
     constructor(
         private readonly loggerService: LoggerService,
@@ -36,6 +37,12 @@ export class PassageService extends EventEmitter {
         this.validNameRe = /^\d+\./
         this.timeFormat = 'YYYY-MM-DD HH:mm:ss'
         this.passages = []
+        this.passageTree = {
+            title: 'root',
+            key: 'root',
+            hasContent: false,
+            children: []
+        }
 
         this.asyncLimitService.init('passage', 10)
 
@@ -50,7 +57,8 @@ export class PassageService extends EventEmitter {
         this.loggerService.info({ content: 'Start load passage', logType: 'LoadPassageStart' })
         this.passages = []
 
-        await this._load(this.folderName)
+        console.log(this.folderName)
+        await this._load(this.folderName, this.passageTree)
         this.emit('upload')
 
         if (asc) {
@@ -86,7 +94,11 @@ export class PassageService extends EventEmitter {
         return this.passages.map(item => item.permalink)
     }
 
-    private async _load(parentPath: string) {
+    public describePassageTree(): PassageNode {
+        return this.passageTree
+    }
+
+    private async _load(parentPath: string, parentNode: PassageNode) {
         const folders = await fsPromises.readdir(parentPath);
 
         for (const folderName of folders) {
@@ -99,7 +111,11 @@ export class PassageService extends EventEmitter {
 
             if (stat.isFile() && folderName.endsWith('.md')) {
                 try {
-                    this.passages.push(await this.parseFile(folderPath))
+                    const parsed = await this.parseFile(folderPath)
+                    this.passages.push(parsed)
+                    parentNode.title = parsed.filename
+                    parentNode.key = parsed.permalink
+                    parentNode.hasContent = true
                 } catch (error) {
                     this.loggerService.error({
                         content: `Warning: ${folderPath} parse failed.`,
@@ -107,7 +123,14 @@ export class PassageService extends EventEmitter {
                     })
                 }
             } else if (stat.isDirectory()) {
-                await this._load(folderPath)
+                const passageNode: PassageNode = {
+                    key: `cloudpress-file-${folderName}`,
+                    title: folderName.split('.')[1],
+                    hasContent: false,
+                    children: []
+                }
+                parentNode.children.push(passageNode)
+                await this._load(folderPath, passageNode)
             }
         }
     }

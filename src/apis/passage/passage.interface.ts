@@ -8,3 +8,10 @@ export interface PassageSchema {
     date: string
     permalink: string
 }
+
+export interface PassageNode {
+    title: string
+    key: string
+    hasContent: boolean
+    children?: PassageNode[]
+}
