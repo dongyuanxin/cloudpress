@@ -40,4 +40,9 @@ export class PassageController {
     async describeAllPassageIds() {
         return await this.passageService.describeAllPassageIds()
     }
+
+    @Get('describe-passage-tree')
+    async describePassageTree() {
+        return this.passageService.describePassageTree()
+    }
 }
