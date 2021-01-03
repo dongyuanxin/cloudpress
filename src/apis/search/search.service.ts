@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { TcbService } from './../../services/tcb.service';
 import { COLLECTION_PASSAGES } from './../../constants/';
 import { SearchPassagesReturn } from './search.interface';
+import { PassageSchema } from '../passage/passage.interface';
 
 @Injectable()
 export class SearchService {
@@ -34,16 +35,17 @@ export class SearchService {
             .field({
                 _id: false,
                 title: true,
-                psgID: true,
                 content: true,
-                publishTime: true,
-                goodTimes: true,
+                permalink: true,
             })
             .get();
 
         return {
             count: total,
-            passages: data,
+            passages: data.map((psg: PassageSchema) => ({
+                ...psg,
+                content: psg.content.slice(0, 80)
+            })),
         };
     }
 }

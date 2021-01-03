@@ -84,7 +84,7 @@ const SearchInput = () => {
                         key={index}
                         className="cp-search-input-item"
                         onClick={() =>
-                            window.open(`/${result.psgID}`, "_blank")
+                            window.open(`/${result.permalink}`, "_blank")
                         }
                     >
                         <div className="cp-search-input-item-title">
