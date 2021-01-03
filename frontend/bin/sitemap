@@ -4,7 +4,7 @@ const path = require("path");
 const sitemap = require("nextjs-sitemap-generator");
 
 sitemap({
-    baseUrl: "https://xxoo521.com",
+    baseUrl: "https://xin-tan.com",
     pagesDirectory: path.join(__dirname, "..", "out"),
     targetDirectory: path.join(__dirname, "..", "out"),
 });

@@ -154,7 +154,7 @@ const CustomFooter = ({ style }) => {
                     打造，在线预览
                     <a
                         style={{ color: "rgba(255,255,255,.9)" }}
-                        href="https://xxoo521.com/"
+                        href="https://xin-tan.com/"
                         target="_blank"
                     >
                         &nbsp;DEMO&nbsp;
