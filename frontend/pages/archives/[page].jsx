@@ -96,7 +96,7 @@ const ArchievePage = ({ passages, total, page }) => {
     return (
         <>
             <SeoHead
-                title={`归档-第${page}页 | 心谭博客`}
+                title={`简记-第${page}页 | 心谭博客`}
                 description={passages
                     .map((passage) => passage.title)
                     .join("，")}
