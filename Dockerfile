@@ -1,11 +1,11 @@
 # image继承（官方推荐）
 # https://hub.docker.com/_/node
-FROM node:12-slim
+FROM node:14-slim
 
 # 拷贝当前所有内容
-COPY . /usr/src/cloudpress
+COPY . /cloudpress
 
-WORKDIR /usr/src/cloudpress/service
+WORKDIR /cloudpress
 
 # 编译过程进行安装
 RUN npm install --registry=https://registry.npm.taobao.org
