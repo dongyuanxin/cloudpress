@@ -1,6 +1,12 @@
 .page-article {
     padding: 50px 0;
 
+    &-copyright {
+        height: 0;
+        width: 0;
+        overflow: hidden;
+    }
+
     h1 {
         font-size: 32px;
     }

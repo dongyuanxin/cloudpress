@@ -81,7 +81,7 @@ const BlogPage = ({ contentHtml, passage, description, anchors }) => {
             if (_treeNode.key === targetKey) {
                 return true
             }
-    
+
             if (Array.isArray(_treeNode.children)) {
                 for (const item of _treeNode.children) {
                     const found = calcSelectedKeys(item)
@@ -116,7 +116,7 @@ const BlogPage = ({ contentHtml, passage, description, anchors }) => {
         try {
             decodeLocalKeys = JSON.parse(localKeys)
             decodeLocalKeys = Array.isArray(decodeLocalKeys) ? decodeLocalKeys : []
-        } catch (error) {}
+        } catch (error) { }
 
         const keysSet = new Set([...decodeLocalKeys, ...expandedKeys])
         const keysSetArr = []
@@ -132,7 +132,7 @@ const BlogPage = ({ contentHtml, passage, description, anchors }) => {
      */
     const renderTree = () => {
         return <Tree
-            onSelect = {
+            onSelect={
                 (selectedKeys, info) => {
                     const selectedKey = selectedKeys[0]
                     setSelectedKeys(selectedKeys)
@@ -149,7 +149,7 @@ const BlogPage = ({ contentHtml, passage, description, anchors }) => {
                     }
                 }
             }
-            onExpand = {(expandedKeys) => setExpandedKeys(expandedKeys)}
+            onExpand={(expandedKeys) => setExpandedKeys(expandedKeys)}
             showIcon
             defaultExpandParent
             defaultSelectedKeys={[]}
@@ -226,10 +226,11 @@ export async function getStaticProps({ params }) {
     const passage = await PassageProvider.describePassage(params.psgID);
     const { content, description } = passage;
     const contentHtml = md.render(content);
+    const copyRightHtml = `<div class="page-article-copyright">${process.env.COPYRIGHT_CONTENT}</div>`
 
     return {
         props: {
-            contentHtml,
+            contentHtml: contentHtml + copyRightHtml,
             description,
             passage: _.omit(passage, [
                 "filepath",
