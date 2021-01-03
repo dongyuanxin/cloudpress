@@ -1,6 +1,6 @@
 import { Injectable, Scope } from '@nestjs/common';
 import { PassageSchema, PassageNode } from './passage.interface';
-import { NOTES_FOLDER, COLLECTION_PASSAGES } from './../../constants'
+import { NOTES_FOLDER, COLLECTION_PASSAGES, COLLECTION_INFOS } from './../../constants'
 import * as fs from 'fs'
 import * as path from 'path'
 import * as moment from 'moment'
@@ -11,9 +11,15 @@ import { TcbService } from 'src/services/tcb.service';
 import { AsyncLimitService } from 'src/services/async-limit.service';
 
 import { EventEmitter } from 'events';
+import { EnvService } from 'src/services/env.service';
 
 const fsPromises = fs.promises;
+
 let uploaded = false;
+
+const INFO_KEYS = {
+    passageTree: 'passageTree'
+}
 
 @Injectable({
     scope: Scope.DEFAULT
@@ -29,7 +35,8 @@ export class PassageService extends EventEmitter {
     constructor(
         private readonly loggerService: LoggerService,
         private readonly tcbService: TcbService,
-        private readonly asyncLimitService: AsyncLimitService
+        private readonly asyncLimitService: AsyncLimitService,
+        private readonly envService: EnvService
     ) {
         super()
         this.folderName = NOTES_FOLDER
@@ -44,22 +51,19 @@ export class PassageService extends EventEmitter {
             children: []
         }
 
-        this.asyncLimitService.init('passage', 10)
+        this.asyncLimitService.init('passage', 6)
 
         this.on('upload', this.onUpload)
     }
 
     public async load(asc: boolean = false) {
-        if (!fs.existsSync(this.folderName)) {
-            throw new Error(`Load passage fail: ${this.folderName} is invalid`)
+        // 是否开启本地上传
+        const enableUpload = this.envService.getEnvironmentVariable('ENABLE_UPLOAD') === 'true'
+        if (enableUpload) {
+            await this.loadFromFs()
+        } else {
+            await this.loadFromDb()
         }
-
-        this.loggerService.info({ content: 'Start load passage', logType: 'LoadPassageStart' })
-        this.passages = []
-
-        console.log(this.folderName)
-        await this._load(this.folderName, this.passageTree)
-        this.emit('upload')
 
         if (asc) {
             this.passages.sort((a, b) => {
@@ -74,7 +78,45 @@ export class PassageService extends EventEmitter {
                 return 0
             })
         }
-        this.loggerService.info({ content: `Finish load ${this.passages.length} valid passages`, logType: 'LoadPassageSuccess' })
+    }
+
+    /**
+     * 从数据库读取文章数据
+     */
+    private async loadFromDb() {
+        const infosCollection = this.tcbService.getCollection(COLLECTION_INFOS)
+        const infosRes = await infosCollection.where({ infoKey: INFO_KEYS.passageTree }).get()
+        this.passageTree = infosRes.data.length
+            ? infosRes.data[0].infoVal
+            : { title: '获取数据失败', hasContent: false, children: [], key: 'fail-get-passage-tree' }
+
+        this.loggerService.info({ content: `Finish load passage tree`, logType: 'LoadPassageTreeFromDbSuccess' })
+
+        const passageCollection = this.tcbService.getCollection(COLLECTION_PASSAGES)
+        const { total: passageCount } = await passageCollection.count()
+        for (let i = 0; i <= Math.floor(passageCount / 100); ++i) {
+            const res = await passageCollection.where({}).skip(i * 100).limit(100).get()
+            this.passages.push(...res.data)
+        }
+
+        this.loggerService.info({ content: `Finish load ${this.passages.length} passages`, logType: 'LoadPassageFromDbSuccess' })
+    }
+
+    /**
+     * 从文件系统中解析文章数据，并上传
+     */
+    private async loadFromFs() {
+        if (!fs.existsSync(this.folderName)) {
+            throw new Error(`Load passage fail: ${this.folderName} is invalid`)
+        }
+
+        this.loggerService.info({ content: 'Start load passage', logType: 'LoadPassageFromFsStart' })
+        this.passages = []
+
+        await this._load(this.folderName, this.passageTree)
+        this.emit('upload')
+
+        this.loggerService.info({ content: `Finish load ${this.passages.length} valid passages`, logType: 'LoadPassageFromFsSuccess' })
         return this.passages
     }
 
@@ -142,13 +184,16 @@ export class PassageService extends EventEmitter {
                 content: 'Please close and rerun server'
             })
         }
-
+        // 1、上传文章目录树结构
+        await this.updatePassageTree()
+        // 2、上传所有文章
         const promises = []
         const { pLimit } = this.asyncLimitService.get('passage')
         for (const passage of this.passages) {
             promises.push(pLimit(() => this.updatePassage(passage)))
         }
         await Promise.all(promises)
+        uploaded = true
         this.loggerService.info({
             logType: 'UploadSuccess'
         })
@@ -171,6 +216,24 @@ export class PassageService extends EventEmitter {
                 title: passage.title,
                 id: passage.permalink
             })
+        })
+    }
+
+    private async updatePassageTree() {
+        const collection = this.tcbService.getCollection(COLLECTION_INFOS)
+        const res = await collection.where({ infoKey: INFO_KEYS.passageTree }).get()
+        if (res.data.length) {
+            await collection.doc(res.data[0]._id).update({
+                infoVal: this.passageTree
+            })
+        } else {
+            await collection.add({
+                infoKey: INFO_KEYS.passageTree,
+                infoVal: this.passageTree
+            })
+        }
+        this.loggerService.info({
+            logType: 'UpdatePassageTreeSuccess'
         })
     }
 
