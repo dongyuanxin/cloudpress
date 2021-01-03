@@ -11,3 +11,7 @@ export const COLLECTION_PAGE_VIEWS = 'cloudpress-v1-pvs';
 // 存放访问人数的集合名
 //  索引：hostname 字段
 export const COLLECTION_SITES = 'cloudpress-v1-sites';
+
+// 存放网站信息的集合名
+//  索引：infoKey 唯一字段
+export const COLLECTION_INFOS = 'cloudpress-v1-infos'
