@@ -1,6 +1,5 @@
 import axios from "axios";
-
-const baseUrl = '//127.0.0.1'
+import { BASE_REQUEST_URL } from './../config';
 
 export class TimesReq {
     static async view(url) {
@@ -10,7 +9,7 @@ export class TimesReq {
                 "Content-Type": "application/json",
             },
             method: "get",
-            url: `${baseUrl}/times/view`,
+            url: `${BASE_REQUEST_URL}/times/view`,
             headers: {
                 'x-cloudpress-url': url || '/',
                 'x-cloudpress-token': localToken

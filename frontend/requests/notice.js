@@ -1,6 +1,5 @@
 import axios from "axios";
-
-const baseUrl = '//127.0.0.1'
+import { BASE_REQUEST_URL } from './../config'
 
 export class NoticeReq {
     static async getNotices(params) {
@@ -11,7 +10,7 @@ export class NoticeReq {
                 "Content-Type": "application/json",
             },
             method: "get",
-            url: `${baseUrl}/notice?startTime=${startTime}&size=${size}`,
+            url: `${BASE_REQUEST_URL}/notice?startTime=${startTime}&size=${size}`,
         };
 
         const axiosRes = await axios(config);

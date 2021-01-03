@@ -1,6 +1,5 @@
 import axios from "axios";
-
-const baseUrl = '//127.0.0.1'
+import { BASE_REQUEST_URL } from './../config'
 
 export class PassageReq {
     static async describePassageTree() {
@@ -9,7 +8,7 @@ export class PassageReq {
                 "Content-Type": "application/json",
             },
             method: "get",
-            url: `${baseUrl}/passage/describe-passage-tree`,
+            url: `${BASE_REQUEST_URL}/passage/describe-passage-tree`,
         };
 
         const axiosRes = await axios(config);
