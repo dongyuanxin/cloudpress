@@ -135,6 +135,7 @@ const BlogPage = ({ contentHtml, passage, description, anchors }) => {
      */
     const renderTree = () => {
         return <Tree
+            style={{ fontWeight: 'bold' }}
             onSelect={
                 (selectedKeys, info) => {
                     const selectedKey = selectedKeys[0]

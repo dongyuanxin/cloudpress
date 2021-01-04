@@ -256,7 +256,7 @@ const Navigation = ({ style }) => {
                                     }}
                                     onClick={() =>
                                         window.open(
-                                            "https://github.com/dongyuanxin/cloudpress",
+                                            "https://github.com/dongyuanxin/blog",
                                             "_blank"
                                         )
                                     }

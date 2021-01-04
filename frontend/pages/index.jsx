@@ -20,10 +20,10 @@ export default function Home() {
                         >
                             <a
                                 style={{ color: "white" }}
-                                href="https://github.com/dongyuanxin/cloudpress"
-                                target="_blank"
+                                href="/notes"
+                                target="_self"
                             >
-                                开始使用
+                                快速浏览
                             </a>
                         </div>
                         <div className="page-home-btn">
