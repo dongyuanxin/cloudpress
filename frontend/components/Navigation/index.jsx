@@ -85,7 +85,7 @@ const Navigation = ({ style }) => {
         refDarkmode.current = new Darkmode(darkmodeOptions);
         setIsLightMode(localStorage.getItem("darkmode") !== "true");
 
-        TimesReq.view(router.pathname)
+        TimesReq.view(router.asPath)
         getNotices();
     }, []);
 
