@@ -8,6 +8,7 @@ import { PassageProvider } from "./../providers/passage";
 import { PassageReq } from './../requests/passage'
 import {
     DownOutlined,
+    LoadingOutlined
 } from "@ant-design/icons";
 import { useRouter } from "next/router";
 
@@ -17,7 +18,7 @@ const SELECTED_KEYS_KEY = 'cloudpress-passage-page-selected-keys'
 
 const BlogPage = ({ contentHtml, passage, description, anchors }) => {
     const router = useRouter();
-    const [treeNode, setTreeNode] = useState([])
+    const [treeNode, setTreeNode] = useState([{ title: '文章目录加载中', key: 'loading', children: [], icon: <LoadingOutlined /> }])
     const [hasContentMap, sethasContentMap] = useState({})
     const [selectedKeys, setSelectedKeys] = useState([])
     const [expandedKeys, setExpandedKeys] = useState([])
@@ -28,8 +29,10 @@ const BlogPage = ({ contentHtml, passage, description, anchors }) => {
 
         PassageReq.describePassageTree()
             .then(res => {
-                handleTreeNode(res)
-                setTreeNode(res.children || [])
+                setTimeout(() => {
+                    handleTreeNode(res)
+                    setTreeNode(res.children || [])
+                }, 1000)
             })
     }, [])
 
