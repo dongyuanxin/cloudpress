@@ -1,5 +1,5 @@
 import "antd/dist/antd.css";
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { Layout, BackTop } from "antd";
 import CustomFooter from "./../components/CustomFooter/";
 import Navigation from "./../components/Navigation/";
@@ -9,19 +9,18 @@ import "highlight.js/styles/atom-one-light.css";
 
 const { Content } = Layout;
 
-// if (process.browser) {
-//     const targetProtocol = "https:";
-//     if (
-//         process.env.NODE_ENV !== "development" &&
-//         window.location.protocol !== targetProtocol
-//     ) {
-//         window.location.href =
-//             targetProtocol + window.location.href.slice(targetProtocol.length);
-//     }
-// }
-
 // This default export is required in a new `pages/_app.js` file.
 export default function MyApp({ Component, pageProps }) {
+    useEffect(() => {
+        if(window.navigator && navigator.serviceWorker) {
+            navigator.serviceWorker.getRegistrations()
+                .then(function(registrations) {
+                    for(let registration of registrations) {
+                        registration.unregister()
+                    }
+                })
+          }
+    }, [])
     return (
         <Layout style={{ background: "white" }}>
             {/* todo: 移动端兼容 */}

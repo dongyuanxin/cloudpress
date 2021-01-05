@@ -32,7 +32,7 @@ const BlogPage = ({ contentHtml, passage, description, anchors }) => {
                 setTimeout(() => {
                     handleTreeNode(res)
                     setTreeNode(res.children || [])
-                }, 1000)
+                }, 500)
             })
     }, [])
 
