@@ -29,10 +29,8 @@ const BlogPage = ({ contentHtml, passage, description, anchors }) => {
 
         PassageReq.describePassageTree()
             .then(res => {
-                setTimeout(() => {
-                    handleTreeNode(res)
-                    setTreeNode(res.children || [])
-                }, 500)
+                handleTreeNode(res)
+                setTreeNode(res.children || [])
             })
     }, [])
 
