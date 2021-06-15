@@ -20,3 +20,11 @@ export const sha256 = (data: string, secret = ''): string => {
     hmac.update(data)
     return hmac.digest("hex")
 }
+
+export const sleep = async (time: number) => {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve(true)
+        }, time)
+    })
+}

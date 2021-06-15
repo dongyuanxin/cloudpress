@@ -12,6 +12,7 @@ import { AsyncLimitService } from 'src/services/async-limit.service';
 
 import { EventEmitter } from 'events';
 import { EnvService } from 'src/services/env.service';
+import { sleep } from 'src/utils';
 
 const fsPromises = fs.promises;
 
@@ -202,21 +203,56 @@ export class PassageService extends EventEmitter {
     /**
      * permalink 是唯一索引
      */
-    private async updatePassage(passage: PassageSchema) {
-        const collection = this.tcbService.getCollection(COLLECTION_PASSAGES)
-        const res1 = await collection.where({ permalink: passage.permalink }).get()
-        if (res1.data.length) {
-            await collection.doc(res1.data[0]._id).update(passage)
-        } else {
-            await collection.add(passage)
-        }
-        this.loggerService.info({
-            logType: 'UpdatePassageSuccess',
-            content: JSON.stringify({
-                title: passage.title,
-                id: passage.permalink
+    private async updatePassage(passage: PassageSchema, retryTimes = 0) {
+        if (retryTimes > 0) {
+            this.loggerService.info({
+                logType: 'UpdatePassageRetry',
+                content: JSON.stringify({
+                    retryTimes,
+                    title: passage.title,
+                    id: passage.permalink
+                })
             })
-        })
+        }
+
+        if (retryTimes > 1) {
+            this.loggerService.error({
+                logType: 'UpdatePassageFail',
+                content: JSON.stringify({
+                    title: passage.title,
+                    id: passage.permalink
+                })
+            })
+            return
+        }
+
+        try {
+            const collection = this.tcbService.getCollection(COLLECTION_PASSAGES)
+            const res = await collection.where({ permalink: passage.permalink }).get()
+            if (res.data.length) {
+                await collection.doc(res.data[0]._id).update(passage)
+            } else {
+                await collection.add(passage)
+            }
+            this.loggerService.info({
+                logType: 'UpdatePassageSuccess',
+                content: JSON.stringify({
+                    title: passage.title,
+                    id: passage.permalink
+                })
+            })
+        } catch (error) {
+            this.loggerService.error({
+                logType: 'UpdatePassageError',
+                errMsg: error.message,
+                content: JSON.stringify({
+                    title: passage.title,
+                    id: passage.permalink
+                })
+            })
+            await sleep(1000)
+            this.updatePassage(passage, retryTimes + 1)
+        }
     }
 
     private async updatePassageTree() {
